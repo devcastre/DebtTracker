@@ -1,65 +1,126 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+
+import { useEffect, useState } from "react";
+import { supabase } from "./lib/supabase";
+import RangeCircle from "./components/RangeCircle";
+
+export default function LandingPage() {
+
+
+  const [debtors, setDebtors] = useState({sortedDebtFreq: [], sortedLent: [], sortedCollection: []})
+  const [totals, setTotals] = useState([])
+
+
+  useEffect(() => {
+    async function getDebtorDashboard(){
+
+      const {data, error} = await supabase
+        .from('debtors')
+        .select('*, transactions (*)')
+    
+      if (error) {
+        console.error('Error fetching active debtors:', error)
+        return
+      }
+
+
+        const totalData = data.reduce((acc, debtor) => {
+
+          const debts = debtor.transactions.filter(d => d.type === 'debt');
+          
+          const totalLentArr = debts.reduce((total, t) => {
+            return total + Number(t.amount)
+          }, 0)
+
+          const payments = debtor.transactions.filter(p => p.type === 'payment');
+
+          const totalCollectedArr = payments.reduce((total, t) => {
+            return total + Number(t.amount)
+          }, 0)
+
+
+          acc.totalLent = acc.totalLent + totalLentArr
+          acc.totalCollected = acc.totalCollected + totalCollectedArr
+
+
+
+
+        return acc
+
+        
+        }, {totalLent: 0, totalCollected: 0})
+
+        setTotals(totalData);
+
+
+
+        const statistics = data.map(d => {
+
+
+          const debts = d.transactions.filter(d => d.type === 'debt');
+          const sumOfDebt = debts.reduce((sum, t) => sum + t.amount, 0)
+
+          const payments = d.transactions.filter(p => p.type === 'payment');
+          const sumOfPayment = payments.reduce((sum, t) => sum + t.amount, 0)
+
+
+          const debtLength = debts.length;
+
+
+          return{id: d.id, name: d.name, sumOfDebt, sumOfPayment, debtLength}
+
+        })
+
+        const sortedDebtFreq = [...statistics].sort((a,b) => b.debtLength - a.debtLength).slice(0, 3);
+        const sortedLent = [...statistics].sort((a, b) => b.sumOfDebt - a.sumOfDebt).slice(0, 3);
+        const sortedCollection = [...statistics].sort((a, b) => b.sumOfPayment - a.sumOfPayment).slice(0, 3);
+
+        setDebtors({sortedDebtFreq, sortedLent, sortedCollection});
+        
+    }
+
+    getDebtorDashboard()
+  }, [])
+
+  console.log(debtors)
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 w-full flex flex-col gap-24'>
+      <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
+        <h1 className="text-(--primaryColor) text-5xl w-100 text-center lg:text-start">Dashboard</h1>
+        <RangeCircle totals={totals}/>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center md:justify-between">
+        <div className="flex flex-col gap-4">
+          <h4 className="text-(--primaryColor)">Pinakamalaking Utang</h4>
+          <ul className="flex flex-col gap-2 mt-auto">
+            {debtors.sortedLent.map(obj => (
+              <li key={obj.id} className="p-4 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfDebt}</span></li>
+            ))}
+          </ul>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-(--primaryColor)">Pinakamalaking Nabayad</h4>
+          <ul className="flex flex-col gap-2 mt-auto">
+            {debtors.sortedCollection.map(obj => (
+              <li key={obj.id} className="p-4 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfPayment}</span></li>
+            ))}
+          </ul>
         </div>
-      </main>
-    </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-(--primaryColor)">Pinakamadalas Umutang</h4>
+          <ul className="flex flex-col gap-2 mt-auto">
+            {debtors.sortedDebtFreq.map(obj => (
+              <li key={obj.id} className="p-4 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.debtLength} Beses</span></li>
+            ))}
+          </ul>   
+        </div>        
+
+
+        
+
+             
+      </div>
+    </main>
   );
 }
