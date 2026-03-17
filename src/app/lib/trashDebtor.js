@@ -2,9 +2,9 @@
 
 import { supabase } from "./supabase";
 
-export default function useDeleteDebtor() {
+export default function useTrashDebtor() {
 
-    const deleteDebtor = async (id) => {
+    const trashDebtor = async (id) => {
 
         const {data, error} = await supabase
             .from('debtors')
@@ -16,6 +16,6 @@ export default function useDeleteDebtor() {
         return data;       
     }
 
-    return {deleteDebtor};
+    return {trashDebtor};
     
 }

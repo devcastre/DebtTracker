@@ -74,7 +74,7 @@ export default function TrashHub() {
   }, [])
   
   return (
-    <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 lg:pb-6 w-full flex flex-col gap-24'>
+    <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 lg:pb-6 w-full flex flex-col gap-12'>
       <h1 className="text-(--primaryColor) text-5xl w-full text-center lg:text-start">TrashHub</h1>
       {loading ? <p>Loading...</p> : <TrashList data={debtors} />}
     </main>

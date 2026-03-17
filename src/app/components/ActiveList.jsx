@@ -4,14 +4,24 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import ListControls from './ListControls';
 import Link from 'next/link';
-import useDeleteDebtor from '../lib/deleteDebtor';
 import Image from 'next/image';
+import useTrashDebtor from '../lib/trashDebtor';
+import Modal from './Modal';
 
 export default function ActiveList({data}) {
 
+    const [list, setList] = useState(data);
+
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('');
-    const [list, setList] = useState(data);
+
+    const [openModal, setOpenModal] = useState(false)
+    const [confirmAction, setConfirmAction] = useState(null)
+
+    const closeModal = () => {
+        setOpenModal(false);
+        setConfirmAction(null);
+    };
 
     useEffect(() => {
         setList(data);
@@ -59,16 +69,22 @@ export default function ActiveList({data}) {
 
 
 
-    const { deleteDebtor } = useDeleteDebtor();
+    const { trashDebtor } = useTrashDebtor();
 
-    const handleDelete = async (id) => {
+    const handleTrash = async (id, balance) => {
 
-        try {
-            await deleteDebtor(id);
+        if(balance > 0){
+            setConfirmAction(() => async () => {
+                await trashDebtor(id, balance);
+                setList(prev => prev.filter(d => d.id !== id));      
+                closeModal();          
+            })
+
+            setOpenModal(true);
+        }
+        else{
+            await trashDebtor(id, 0);
             setList(prev => prev.filter(d => d.id !== id));
-        } 
-        catch (err) {
-            console.error(err);
         }
     };    
 
@@ -78,7 +94,7 @@ export default function ActiveList({data}) {
 
   return (
     <div className='flex flex-col bg-white rounded-lg p-6 gap-12'>
-        <div className='flex flex-col gap-6 item-center md:items-start'>
+        <div className='flex flex-col gap-6 items-center md:items-start'>
             <h3 className='text-(--primaryColor) font-semibold md:whitespace-nowrap'>Listahan ng may-utang</h3>
             <ListControls
                 search={search}
@@ -96,7 +112,7 @@ export default function ActiveList({data}) {
                         <span className='px-2'>{d.name}</span>
                         <div className='px-4 py-2 w-36 rounded-md bg-white text-black shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.75)]'>₱ {d.balance}</div>
                     </Link> 
-                    <button onClick={(e) => handleDelete(d.id)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                    <button onClick={() => handleTrash(d.id, d.balance)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                         <Image
                         src='/Icons/trashIconW.svg'
                         alt="restoreIcon"
@@ -108,6 +124,13 @@ export default function ActiveList({data}) {
                 </li>
             ))}
         </ul>
+
+
+        <Modal
+            isOpen={openModal}
+            onConfirm={confirmAction}
+            onCancel={closeModal}
+        />
     
     </div>
   )

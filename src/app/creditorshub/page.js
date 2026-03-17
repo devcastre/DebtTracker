@@ -74,7 +74,7 @@ export default function CreditorsHub() {
 
 
   return (
-    <main className="px-6 pt-12 pb-32 md:px-8 lg:px-12 lg:pb-6 w-full flex flex-col gap-24">
+    <main className="px-6 pt-12 pb-32 md:px-8 lg:px-12 lg:pb-6 w-full flex flex-col gap-12">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
           <h1 className="text-(--primaryColor) text-5xl w-100 text-center lg:text-start">CreditorsHub</h1>
