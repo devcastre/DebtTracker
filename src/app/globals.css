@@ -46,3 +46,7 @@ h1, h2, h3, h4, h5, h6{
   h6 { @apply text-base font-medium mb-1; }
   
 }
+
+@theme {
+  --breakpoint-xs: 430px;
+}

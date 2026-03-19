@@ -8,7 +8,7 @@ export function Sidebar() {
 
         <aside className="[background:var(--primary-gradient)] text-white hidden md:flex md:w-72 flex-col gap-12 py-12 px-5 md:px-3">
             <span>
-                <h3 className="text-white text-4xl">Debt Tracker</h3>
+                <h3 className="text-white text-4xl italic">Debt Tracker</h3>
             </span>
             <NavItems />
         </aside>

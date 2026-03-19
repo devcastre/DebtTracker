@@ -87,38 +87,34 @@ export default function LandingPage() {
   return (
     <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 w-full flex flex-col gap-24'>
       <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
-        <h1 className="text-(--primaryColor) text-5xl w-100 text-center lg:text-start">Dashboard</h1>
+        <h1 className="text-(--primaryColor) text-5xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">Dashboard</h1>
         <RangeCircle totals={totals}/>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center md:justify-between">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 p-5 rounded-lg shadow-[inset_8px_8px_4px_rgba(0,0,0,0.3),inset_-8px_-8px_4px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor)">Pinakamalaking Utang</h4>
           <ul className="flex flex-col gap-2 mt-auto">
             {debtors.sortedLent.map(obj => (
-              <li key={obj.id} className="p-4 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfDebt}</span></li>
+              <li key={obj.id} className="mx-1 p-3 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfDebt}</span></li>
             ))}
           </ul>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 p-4 rounded-lg shadow-[inset_8px_8px_4px_rgba(0,0,0,0.4),inset_-8px_-8px_4px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor)">Pinakamalaking Nabayad</h4>
           <ul className="flex flex-col gap-2 mt-auto">
             {debtors.sortedCollection.map(obj => (
-              <li key={obj.id} className="p-4 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfPayment}</span></li>
+              <li key={obj.id} className="mx-1 p-3 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfPayment}</span></li>
             ))}
           </ul>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 p-4 rounded-lg shadow-[inset_8px_8px_4px_rgba(0,0,0,0.4),inset_-8px_-8px_4px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor)">Pinakamadalas Umutang</h4>
           <ul className="flex flex-col gap-2 mt-auto">
             {debtors.sortedDebtFreq.map(obj => (
-              <li key={obj.id} className="p-4 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.debtLength} Beses</span></li>
+              <li key={obj.id} className="mx-1 p-3 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.debtLength} Beses</span></li>
             ))}
           </ul>   
         </div>        
-
-
-        
-
              
       </div>
     </main>

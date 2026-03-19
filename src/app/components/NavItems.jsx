@@ -37,10 +37,10 @@ export function NavItems({ mobile = false }) {
                   items-center gap-1 
                   md:gap-3
                   px-2 py-2 transition
-                  uppercase
+                  text-sm font-semibold uppercase
                   ${mobile
-                    ? "flex-1 justify-center mb-4 text-sm"
-                    : "w-full md:text-sm"}
+                    ? "flex-1 justify-center mb-4"
+                    : "w-full"}
                   ${
                     isActive
                       ? mobile

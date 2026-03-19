@@ -84,12 +84,15 @@ export default function DebtorsProfilePage() {
 
   return (
     <main className='px-6 pt-6 pb-32 md:p-12 w-full flex flex-col gap-5'>       
-      <div className='flex flex-wrap justify-between'>
+      <div className='flex flex-col xs:flex-row xs:justify-between'>
         <div className='flex flex-col'>
           <h1 className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>{debtor.name}</h1>
-          <span className='text-black italic'>{debtor.contact}</span>          
+          <span className='text-black'>{debtor.contact}</span>          
         </div>
-        <h2 className='text-(--primaryColor)'><span className='text-xs italic text-black'>Balance:</span> ₱{balance}</h2>    
+        <div className='flex flex-row xs:flex-col items-end gap-1 xs:gap-0'>
+          <h2 className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{balance}</h2>
+          <span className='text-black'>Balance</span> 
+        </div>  
       </div>
 
       <div className='flex flex-col bg-white rounded-lg p-6 gap-12'>
