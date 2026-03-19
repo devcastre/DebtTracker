@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase'
 import ActiveList from '../components/ActiveList'
 import Link from 'next/link'
 import Image from 'next/image'
+import { exportDebtorsToExcel } from '../lib/excelExport'
 
 export default function CreditorsHub() {
   const [debtors, setDebtors] = useState([])
@@ -79,15 +80,24 @@ export default function CreditorsHub() {
         <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
           <h1 className="text-(--primaryColor) text-5xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">CreditorsHub</h1>
 
-          <div className="flex flex-row gap-6">
-            <Link href="/createdebtors" className="bg-(--primaryColor) p-2 w-72 h-14 rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]">
+          <div className="flex flex-col 2xs:flex-row items-center gap-6 ">
+            <button onClick={() => exportDebtorsToExcel(debtors)} className="bg-(--primaryColor) p-2 w-56 h-14 rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]">
+              <Image
+                src='/Icons/downloadIconW.svg'
+                alt="downloadIcon"
+                width={30}
+                height={30}
+              />              
+              Ang Listahan
+            </button>
+            <Link href="/createdebtors" className="bg-(--primaryColor) p-2 w-56 h-14 rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]">
               <Image
                 src='/Icons/addIconW.svg'
                 alt="addIcon"
                 width={30}
                 height={30}
               />              
-              Mag-dadag ng may-utang
+              May-utang
             </Link>
           </div>
         </div>

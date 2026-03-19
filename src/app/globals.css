@@ -21,7 +21,7 @@
 
 body {
   background: var(--background);
-  font-family: var(--roboto);
+  font-family: var(--poppins);
 }
 
 button{
@@ -30,7 +30,7 @@ button{
 
 
 h1, h2, h3, h4, h5, h6{
-  font-family: var(--poppins);
+  font-family: var(--roboto);
 }
 
 
@@ -49,4 +49,5 @@ h1, h2, h3, h4, h5, h6{
 
 @theme {
   --breakpoint-xs: 430px;
+  --breakpoint-2xs: 600px;
 }
