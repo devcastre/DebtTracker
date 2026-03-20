@@ -1,4 +1,4 @@
-import { Poppins, Roboto } from "next/font/google";
+import { Lato, Poppins } from "next/font/google";
 import "./globals.css";
 import { BottomNav, Sidebar } from "./components/SwitchingNavbar";
 
@@ -8,10 +8,10 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+const lato = Lato({
+  variable: "--font-lato",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["300", "400", "700"],
 });
 
 export const metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${roboto.variable} antialiased min-h-screen flex flex-col md:flex-row`}
+        className={`${poppins.variable} ${lato.variable} antialiased min-h-screen flex flex-col md:flex-row`}
       >
         <Sidebar />
 

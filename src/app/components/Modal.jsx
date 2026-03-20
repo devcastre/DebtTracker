@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Modal({isOpen, onCancel, onConfirm}) {
+export default function Modal({isOpen, onCancel, onConfirm, debtors}) {
   if (!isOpen) return null;
 
   return (
