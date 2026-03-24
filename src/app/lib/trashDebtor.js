@@ -1,6 +1,6 @@
 'use client'
 
-import { supabase } from "./supabase";
+import { supabase } from "@/app/lib/supabase";
 
 export default function useTrashDebtor() {
 
@@ -22,18 +22,21 @@ export default function useTrashDebtor() {
                 .from('transactions')
                 .insert([
                     {
-                    debtor_id: id,
-                    type: 'payment',
-                    amount: balance,
-                    date: localDateTime,
-                    interest_rate: 5
+                        user_id: user.id,
+                        debtor_id: id,
+                        type: 'payment',
+                        amount: balance,
+                        date: localDateTime,
+                        interest_rate: 5
                     }
                 ]);
             }        
 
+            const { data: { user } } = await supabase.auth.getUser();
             const {data, error} = await supabase
                 .from('debtors')
                 .update({status: 'trash'})
+                .eq("user_id", user.id)
                 .eq('id', id)
 
             if(error) throw error  

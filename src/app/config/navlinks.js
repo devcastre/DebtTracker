@@ -4,7 +4,7 @@ export const navLinks = [
 
     {
         label: "Dashboard", 
-        href: "/",
+        href: "/dashboard",
         icon1: '/Icons/dashIconW.svg',
         icon2: '/Icons/dashIconB.svg'
     },

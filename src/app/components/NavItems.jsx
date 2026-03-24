@@ -2,7 +2,7 @@
 
 
 import { usePathname } from "next/navigation"
-import { navLinks } from "../config/navlinks";
+import { navLinks } from "@/app/config/navlinks";
 import Link from "next/link";
 import Image from "next/image";
 

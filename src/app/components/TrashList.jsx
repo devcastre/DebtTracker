@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
-import ListControls from './ListControls'
-import useRestoreDebtor from '../lib/restoreDebtor';
-import usePermaDeleteDebtor from '../lib/permaDeleteDebtor';
+import ListControls from '@/app/components/ListControls'
+import useRestoreDebtor from '@/app/lib/restoreDebtor';
+import usePermaDeleteDebtor from '@/app/lib/permaDeleteDebtor';
 import Image from 'next/image';
 
 export default function TrashList({data}) {

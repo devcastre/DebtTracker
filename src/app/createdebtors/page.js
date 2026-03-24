@@ -2,7 +2,7 @@
 
 
 import React, { useState } from 'react'
-import { supabase } from '../lib/supabase';
+import { supabase } from '@/app/lib/supabase';
 import Link from 'next/link';
 
 export default function CreateDebtors() {
@@ -29,13 +29,15 @@ export default function CreateDebtors() {
 
         try {
             
+            const { data: { user } } = await supabase.auth.getUser();
             const {data, error} = await supabase
                 .from('debtors')
                 .insert(
                     {
                         name: form.name,
                         contact: form.contact,
-                        status: form.status
+                        status: form.status,
+                        user_id: user.id
                     }
                 )
                 .select()

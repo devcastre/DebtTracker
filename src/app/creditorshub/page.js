@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
-import ActiveList from '../components/ActiveList'
+import { supabase } from '@/app/lib/supabase'
+import ActiveList from '@/app/components/ActiveList'
 import Link from 'next/link'
 import Image from 'next/image'
-import { exportDebtorsToExcel } from '../lib/excelExport'
+import { exportDebtorsToExcel } from '@/app/lib/excelExport'
 
 export default function CreditorsHub() {
   const [debtors, setDebtors] = useState([])
@@ -17,9 +17,11 @@ export default function CreditorsHub() {
       setLoading(true)
       setError(null)
 
+      const { data: { user } } = await supabase.auth.getUser();
       const { data, error } = await supabase
         .from('debtors')
         .select(`*, transactions(*)`)
+        .eq('user_id', user.id)
         .eq('status', 'active')
 
       if (error) {

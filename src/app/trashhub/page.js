@@ -2,8 +2,8 @@
 
 
 import React, { useEffect, useState } from 'react'
-import TrashList from '../components/TrashList';
-import { supabase } from '../lib/supabase';
+import TrashList from '@/app/components/TrashList';
+import { supabase } from '@/app/lib/supabase';
 
 
 
@@ -17,9 +17,11 @@ export default function TrashHub() {
       setLoading(true)
       setError(null)
 
+      const { data: { user } } = await supabase.auth.getUser();
       const { data, error } = await supabase
         .from('debtors')
         .select(`*, transactions(*)`)
+        .eq("user_id", user.id)
         .eq('status', 'trash')
 
       if (error) {

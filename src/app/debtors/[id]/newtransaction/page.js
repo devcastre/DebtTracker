@@ -16,10 +16,12 @@ export default function TransactionForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { data: { user } } = await supabase.auth.getUser();
     const { data, error } = await supabase
       .from('transactions')
       .insert([
         {
+          user_id: user.id,
           debtor_id: Number(debtorId),
           type,
           amount: Number(amount),

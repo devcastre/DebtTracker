@@ -1,6 +1,7 @@
 'use client'
 
-import { NavItems } from "../components/NavItems";
+import { NavItems } from "@/app/components/NavItems";
+import LogoutButton from "./LogOut";
 
 export function Sidebar() {
   
@@ -11,6 +12,7 @@ export function Sidebar() {
                 <h3 className="text-white text-3xl italic">Debt Tracker</h3>
             </span>
             <NavItems />
+            <LogoutButton />
         </aside>
     )
 }

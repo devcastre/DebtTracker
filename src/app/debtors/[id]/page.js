@@ -18,9 +18,12 @@ export default function DebtorsProfilePage() {
 
     useEffect(() => {
       async function getDebtorById() {
+
+        const { data: { user } } = await supabase.auth.getUser();
         const {data, error } = await supabase
           .from("debtors")
           .select(`*, transactions(*)`)
+          .eq("user_id", user.id)
           .eq("id", id)
           .single()
 
