@@ -11,16 +11,13 @@ export default function LogoutButton() {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error('Logout error:', error.message);
-    } else {
-
-      router.replace('/');
     }
   };
 
   return (
     <button
       onClick={handleLogout}
-      className="text-sm text-gray-700 hover:text-red-600"
+      className="text-sm font-bold p-2 italic rounded-md text-white border-2 hover:text-(--primaryColor) hover:border-0 hover:bg-white"
     >
       Logout
     </button>

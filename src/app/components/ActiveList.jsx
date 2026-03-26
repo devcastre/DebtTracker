@@ -30,10 +30,10 @@ export default function ActiveList({data}) {
 
     const sortoptions = [
         { value: 'name', label: 'ABCD...' },
-        { value: 'recentdebt', label: 'Kakautang lang' },
-        { value: 'recentpayment', label: 'Kakabayad lang' },
-        { value: 'highestdebts', label: 'Pinakamataas na utang' },
-        { value: 'lowestdebts', label: 'Pinakamababa na utang' }
+        { value: 'recentdebt', label: 'Recently Debt' },
+        { value: 'recentpayment', label: 'Recently Paid' },
+        { value: 'highestdebts', label: 'Highest Balance' },
+        { value: 'lowestdebts', label: 'Lowest Balance' }
     ]
 
 
@@ -104,26 +104,31 @@ export default function ActiveList({data}) {
                 sortOptions={sortoptions}
             />            
         </div>
+        
+        {processeddata.length === 0 ? (
+            <div className='h-72 flex flex-col items-center justify-center mb-10'>No Data Found</div>
+        ) : (
+            <ul className='flex flex-col gap-5'>
+                {processeddata.map(d => (
+                    <li key={d.id} className='grid grid-cols-1 lg:grid-cols-[4fr_1fr] gap-2 lg:gap-6'>
+                        <Link href={`/debtors/${d.id}`} className='flex flex-row items-center justify-between p-2 bg-(--primaryColor) text-white rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                            <span className='px-2'>{d.name}</span>
+                            <div className='px-4 py-1 w-36 rounded-md bg-white text-black shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.75)]'>₱ {d.balance}</div>
+                        </Link> 
+                        <button onClick={() => handleTrash(d.id, d.balance)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                            <Image
+                            src='/Icons/trashIconW.svg'
+                            alt="restoreIcon"
+                            width={30}
+                            height={30}
+                            />                           
+                            Itapon
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        )}
 
-        <ul className='flex flex-col gap-5'>
-            {processeddata.map(d => (
-                <li key={d.id} className='grid grid-cols-1 lg:grid-cols-[4fr_1fr] gap-2 lg:gap-6'>
-                    <Link href={`/debtors/${d.id}`} className='flex flex-row items-center justify-between p-2 bg-(--primaryColor) text-white rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
-                        <span className='px-2'>{d.name}</span>
-                        <div className='px-4 py-1 w-36 rounded-md bg-white text-black shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.75)]'>₱ {d.balance}</div>
-                    </Link> 
-                    <button onClick={() => handleTrash(d.id, d.balance)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
-                        <Image
-                        src='/Icons/trashIconW.svg'
-                        alt="restoreIcon"
-                        width={30}
-                        height={30}
-                        />                           
-                        Itapon
-                    </button>
-                </li>
-            ))}
-        </ul>
 
 
         <Modal

@@ -1,6 +1,8 @@
 import { Lato, Poppins } from "next/font/google";
 import "./globals.css";
-import { BottomNav, Sidebar } from "./components/SwitchingNavbar";
+// import { BottomNav, Sidebar } from "./components/SwitchingNavbar";
+import SessionWrapper from "./components/SessionWrapper";
+import { supabase } from "./lib/supabase";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -20,16 +22,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+  
+
   return (
     <html lang="en">
       <body
         className={`${poppins.variable} ${lato.variable} antialiased min-h-screen flex flex-col md:flex-row`}
       >
-        <Sidebar />
+        <SessionWrapper>
+          {children}
+        </SessionWrapper>
 
-        {children}
-
-        <BottomNav />
       </body>
     </html>
   );

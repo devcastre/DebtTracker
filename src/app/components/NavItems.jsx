@@ -36,7 +36,7 @@ export function NavItems({ mobile = false }) {
                   md:flex-row 
                   items-center gap-1 
                   md:gap-3
-                  px-2 py-2 transition
+                  p-2 transition
                   text-sm font-semibold uppercase
                   ${mobile
                     ? "flex-1 justify-center mb-4"

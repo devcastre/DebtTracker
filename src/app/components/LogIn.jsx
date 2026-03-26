@@ -1,4 +1,7 @@
-'use client';
+'use client'
+
+
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/app/lib/supabase';
@@ -33,9 +36,6 @@ export default function LogIn() {
     router.replace('/dashboard');
   };
 
-  console.log("EMAIL RAW:", email);
-  console.log("EMAIL JSON:", JSON.stringify(email));
-  console.log("EMAIL LENGTH:", email.length);
 
   const handleSignup = async () => {
     setLoading(true);
@@ -55,7 +55,7 @@ export default function LogIn() {
     setIsLogin(true);
   };
 
-  console.log(typeof email)
+
 
   return (
     <div className="max-w-md mx-auto mt-20 p-6 border rounded-lg shadow-lg bg-white">

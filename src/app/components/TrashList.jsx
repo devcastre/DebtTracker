@@ -85,34 +85,37 @@ export default function TrashList({data}) {
                 sortOptions={sortoptions}
             />            
         </div>
-
-        <ul className='flex flex-col gap-5'>
-            {processeddata.map(d => (
-                <li key={d.id} className='grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-2 lg:gap-6'>
-                    <span className='p-2 bg-(--primaryColor) text-white text-center lg:text-start rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>{d.name}</span>
-                    <div className='flex flex-row gap-2'>
-                        <button onClick={(e) => handleRestore(d.id)} className='flex gap-2 w-full p-2 bg-(--secondaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
-                            <Image
-                            src='/Icons/restoreIconW.svg'
-                            alt="restoreIcon"
-                            width={30}
-                            height={30}
-                            />
-                            Ibalik
-                        </button>
-                        <button onClick={(e) => handleDeletePermanent(d.id)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
-                            <Image
-                            src='/Icons/trashIconSW.svg'
-                            alt="restoreIcon"
-                            width={30}
-                            height={30}
-                            />                            
-                            Burahin
-                        </button>
-                    </div>
-                </li>
-            ))}
-        </ul>
+        {processeddata.length === 0 ? (
+            <div className='h-72 flex flex-col items-center justify-center mb-10'>No Data Found</div>
+        ) : (
+            <ul className='flex flex-col gap-5'>
+                {processeddata.map(d => (
+                    <li key={d.id} className='grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-2 lg:gap-6'>
+                        <span className='p-2 bg-(--primaryColor) text-white text-center lg:text-start rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>{d.name}</span>
+                        <div className='flex flex-row gap-2'>
+                            <button onClick={(e) => handleRestore(d.id)} className='flex gap-2 w-full p-2 bg-(--secondaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                                <Image
+                                src='/Icons/restoreIconW.svg'
+                                alt="restoreIcon"
+                                width={30}
+                                height={30}
+                                />
+                                Ibalik
+                            </button>
+                            <button onClick={(e) => handleDeletePermanent(d.id)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                                <Image
+                                src='/Icons/trashIconSW.svg'
+                                alt="restoreIcon"
+                                width={30}
+                                height={30}
+                                />                            
+                                Burahin
+                            </button>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        )}
     
     </div>
 
