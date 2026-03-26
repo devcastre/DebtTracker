@@ -21,9 +21,12 @@ export function BottomNav() {
   
     return (
 
-        <nav className="[background:var(--primary-gradient)] text-white fixed bottom-0 left-0 right-0 z-50 md:hidden">
-            <NavItems mobile />
-        </nav>
+        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden flex flex-col gap-2">
+            <LogoutButton />
+            <nav className="[background:var(--primary-gradient)] text-white w-full">
+                <NavItems mobile />
+            </nav>
+        </div>
     )
 }
 

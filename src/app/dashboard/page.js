@@ -89,7 +89,7 @@ export default function Dashboard() {
   return (
     <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 w-full flex flex-col gap-24'>
       <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
-        <h1 className="text-(--primaryColor) text-5xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">Dashboard</h1>
+        <h1 className="text-(--primaryColor) text-4xl sm:text-5xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">Dashboard</h1>
         <RangeCircle totals={totals}/>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center md:justify-between">

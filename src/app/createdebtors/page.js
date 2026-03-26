@@ -51,6 +51,7 @@ export default function CreateDebtors() {
                     .from('transactions')
                     .insert(
                         {
+                            user_id: user.id,
                             debtor_id: data.id,
                             type: 'debt',
                             amount: Number(form.amount),

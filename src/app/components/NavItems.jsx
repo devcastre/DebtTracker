@@ -32,11 +32,11 @@ export function NavItems({ mobile = false }) {
                 href={link.href}
                 className={`
                   relative
-                  flex flex-col 
-                  md:flex-row 
+                  flex flex-row
                   items-center gap-1 
                   md:gap-3
-                  p-2 transition
+                  p-2 
+                  transition ease-in-out
                   text-sm font-semibold uppercase
                   ${mobile
                     ? "flex-1 justify-center mb-4"
@@ -57,7 +57,7 @@ export function NavItems({ mobile = false }) {
                   width={30}
                   height={30}
                 />
-                {link.label}
+                {mobile ? isActive ? (<span className="text-xs mt-1">{link.label}</span>) : ('') : (<span className="text-xs mt-1">{link.label}</span>)}
               </Link>
 
             </li>);

@@ -1,8 +1,7 @@
 import { Lato, Poppins } from "next/font/google";
 import "./globals.css";
-// import { BottomNav, Sidebar } from "./components/SwitchingNavbar";
 import SessionWrapper from "./components/SessionWrapper";
-import { supabase } from "./lib/supabase";
+
 
 const poppins = Poppins({
   variable: "--font-poppins",

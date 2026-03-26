@@ -77,7 +77,7 @@ export default function TrashHub() {
   
   return (
     <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 lg:pb-6 w-full flex flex-col gap-6'>
-      <h1 className="text-(--primaryColor) text-5xl w-full text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">TrashHub</h1>
+      <h1 className="text-(--primaryColor) text-4xl sm:text-5xl w-full text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">TrashHub</h1>
       {loading ? <p>Loading...</p> : <TrashList data={debtors} />}
     </main>
   )

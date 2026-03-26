@@ -80,7 +80,7 @@ export default function CreditorsHub() {
     <main className="px-6 pt-12 pb-32 md:px-8 lg:px-12 lg:pb-6 w-full flex flex-col gap-12">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
-          <h1 className="text-(--primaryColor) text-5xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">CreditorsHub</h1>
+          <h1 className="text-(--primaryColor) text-4xl sm:text-5xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">CreditorsHub</h1>
 
           <div className="flex flex-col 2xs:flex-row items-center gap-6 ">
             <button onClick={() => exportDebtorsToExcel(debtors)} className="bg-(--primaryColor) p-2 w-56 h-14 rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]">

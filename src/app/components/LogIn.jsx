@@ -58,44 +58,62 @@ export default function LogIn() {
 
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 border rounded-lg shadow-lg bg-white">
-      <h2 className="text-2xl font-bold mb-4">{isLogin ? 'Login' : 'Sign Up'}</h2>
+    <div className="p-6 w-full max-w-md mx-auto bg-white shadow-lg rounded-md mt-20">
+      <h2 className="text-2xl font-bold mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
 
-      {errorMsg && <p className="text-red-500 mb-2">{errorMsg}</p>}
+      {errorMsg && <p className="text-red-500 mb-4 text-center">{errorMsg}</p>}
 
-      <input
-        type="email"
-        placeholder="Email"
-        className="w-full mb-3 p-2 border rounded"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+      <form className="flex flex-col gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2">
+          <label htmlFor="email" className="mb-1 text-base font-medium text-gray-700">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            required
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-blue-500 focus:shadow-md"
+          />
+        </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        className="w-full mb-3 p-2 border rounded"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2">
+          <label htmlFor="password" className="mb-1 text-base font-medium text-gray-700">
+            Password:
+          </label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            required
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-blue-500 focus:shadow-md"
+          />
+        </div>
 
-      <button
-        onClick={isLogin ? handleLogin : handleSignup}
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        disabled={loading}
-      >
-        {loading ? 'Please wait...' : isLogin ? 'Login' : 'Sign Up'}
-      </button>
-
-      <p className="mt-4 text-center text-gray-600">
-        {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
         <button
-          onClick={() => setIsLogin(!isLogin)}
-          className="text-blue-500 hover:underline"
+          type="button"
+          onClick={isLogin ? handleLogin : handleSignup}
+          disabled={loading}
+          className="w-full bg-blue-500 text-white py-3 rounded-md shadow-md hover:bg-blue-600 transition-colors duration-200"
         >
-          {isLogin ? 'Sign Up' : 'Login'}
+          {loading ? 'Please wait...' : isLogin ? 'Login' : 'Sign Up'}
         </button>
-      </p>
+
+        <p className="text-center text-gray-600 mt-2">
+          {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
+          <button
+            type="button"
+            onClick={() => setIsLogin(!isLogin)}
+            className="text-blue-500 hover:underline"
+          >
+            {isLogin ? 'Sign Up' : 'Login'}
+          </button>
+        </p>
+      </form>
     </div>
   );
 }
