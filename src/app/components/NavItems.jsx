@@ -48,7 +48,7 @@ export function NavItems({ mobile = false }) {
                         ? "text-(--primaryColor) bg-(--background) rounded-b-md"
 
                         : "text-(--primaryColor) bg-white rounded-md"
-                      : "text-white hover:text-white hover:bg-white/10"
+                      : "text-white hover:text-white hover:bg-white/20"
               }`}
               >
                 <Image

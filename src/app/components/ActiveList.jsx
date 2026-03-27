@@ -95,7 +95,7 @@ export default function ActiveList({data}) {
   return (
     <div className='flex flex-col bg-white rounded-lg p-6 gap-12'>
         <div className='flex flex-col gap-6 items-center md:items-start'>
-            <h3 className='text-(--primaryColor) font-semibold md:whitespace-nowrap'>Listahan ng may-utang</h3>
+            <h3 className='text-(--primaryColor) font-medium md:whitespace-nowrap'>List of Active Debtors</h3>
             <ListControls
                 search={search}
                 setSearch={setSearch}
@@ -122,7 +122,7 @@ export default function ActiveList({data}) {
                             width={30}
                             height={30}
                             />                           
-                            Itapon
+                            Trash
                         </button>
                     </li>
                 ))}

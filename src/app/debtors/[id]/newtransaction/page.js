@@ -48,7 +48,7 @@ export default function TransactionForm() {
             <select
               value={type}
               onChange={e => setType(e.target.value)}
-              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 pl-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md'
+              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 pl-4 text-base font-medium text-[#6B7280] outline-none focus:border-(--tertiaryColor) focus:shadow-md'
             >
               <option value="debt">Debt</option>
               <option value="payment">Payment</option>
@@ -65,7 +65,7 @@ export default function TransactionForm() {
               onChange={e => setAmount(e.target.value)}
               placeholder="Amount"
               required
-              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md'
+              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-(--tertiaryColor) focus:shadow-md'
             />
           </div>
 
@@ -79,13 +79,13 @@ export default function TransactionForm() {
               onChange={e => setDate(e.target.value)}
               placeholder='dd/mm/yyyy'
               required
-              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md'
+              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-(--tertiaryColor) focus:shadow-md'
             />
           </div>
 
           <button
             type="submit"
-            className='w-full p-2 bg-(--primaryColor) text-white rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
+            className='w-full p-2 bg-(--primaryColor) hover:bg-(--tertiaryColor) text-white hover:text-(--primaryColor) rounded-md shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
           >
             Add Transaction
           </button>

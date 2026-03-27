@@ -90,16 +90,16 @@ export default function CreditorsHub() {
                 width={30}
                 height={30}
               />              
-              Ang Listahan
+              Active List
             </button>
             <Link href="/createdebtors" className="bg-(--primaryColor) p-2 w-56 h-14 rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]">
               <Image
                 src='/Icons/addIconW.svg'
                 alt="addIcon"
-                width={30}
+                width={30}  
                 height={30}
               />              
-              May-utang
+              New Debtors
             </Link>
           </div>
         </div>

@@ -93,7 +93,7 @@ export default function Dashboard() {
         <RangeCircle totals={totals}/>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center md:justify-between">
-        <div className="flex flex-col gap-4 p-5 rounded-lg shadow-[inset_8px_8px_4px_rgba(0,0,0,0.3),inset_-8px_-8px_4px_rgba(255,255,255)]">
+        <div className="flex flex-col gap-4 p-5 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor)">Largest Debt</h4>
           {debtors.sortedCollection.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
@@ -105,7 +105,7 @@ export default function Dashboard() {
               </ul>
           )}
         </div>
-        <div className="flex flex-col gap-4 p-4 rounded-lg shadow-[inset_8px_8px_4px_rgba(0,0,0,0.4),inset_-8px_-8px_4px_rgba(255,255,255)]">
+        <div className="flex flex-col gap-4 p-4 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor)">Largest Payment</h4>
           {debtors.sortedCollection.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
@@ -117,7 +117,7 @@ export default function Dashboard() {
               </ul>
           )}
         </div>
-        <div className="flex flex-col gap-4 p-4 rounded-lg shadow-[inset_8px_8px_4px_rgba(0,0,0,0.4),inset_-8px_-8px_4px_rgba(255,255,255)]">
+        <div className="flex flex-col gap-4 p-4 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor)">Most Frequent Borrower</h4>
           {debtors.sortedCollection.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>

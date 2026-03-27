@@ -76,7 +76,7 @@ export default function TrashList({data}) {
     
     <div className='flex flex-col bg-white rounded-lg p-6 gap-12'>
         <div className='flex flex-col gap-6 item-center md:items-start'>
-            <h3 className='text-(--primaryColor) font-semibold md:whitespace-nowrap'>Listahan ng mga natapon</h3>
+            <h3 className='text-(--primaryColor) font-medium md:whitespace-nowrap'>List of Trashed Debtors</h3>
             <ListControls
                 search={search}
                 setSearch={setSearch}
@@ -100,7 +100,7 @@ export default function TrashList({data}) {
                                 width={30}
                                 height={30}
                                 />
-                                Ibalik
+                                Restore
                             </button>
                             <button onClick={(e) => handleDeletePermanent(d.id)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                                 <Image
@@ -109,7 +109,7 @@ export default function TrashList({data}) {
                                 width={30}
                                 height={30}
                                 />                            
-                                Burahin
+                                Delete
                             </button>
                         </div>
                     </li>

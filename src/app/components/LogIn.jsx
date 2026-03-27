@@ -59,7 +59,7 @@ export default function LogIn() {
 
   return (
     <div className="p-6 w-full max-w-md mx-auto bg-white shadow-lg rounded-md mt-20">
-      <h2 className="text-2xl font-bold mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
+      <h2 className="text-3xl text-(--primaryColor) font-bold mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
 
       {errorMsg && <p className="text-red-500 mb-4 text-center">{errorMsg}</p>}
 
@@ -75,7 +75,7 @@ export default function LogIn() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             required
-            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-blue-500 focus:shadow-md"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-(--tertiaryColor) focus:shadow-md"
           />
         </div>
 
@@ -90,7 +90,7 @@ export default function LogIn() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             required
-            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-blue-500 focus:shadow-md"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-(--tertiaryColor) focus:shadow-md"
           />
         </div>
 
@@ -98,7 +98,7 @@ export default function LogIn() {
           type="button"
           onClick={isLogin ? handleLogin : handleSignup}
           disabled={loading}
-          className="w-full bg-blue-500 text-white py-3 rounded-md shadow-md hover:bg-blue-600 transition-colors duration-200"
+          className="w-full bg-(--primaryColor) text-white hover:text-(--primaryColor) py-3 rounded-md hover:bg-(--tertiaryColor) transition-colors duration-200 shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]"
         >
           {loading ? 'Please wait...' : isLogin ? 'Login' : 'Sign Up'}
         </button>
@@ -108,7 +108,7 @@ export default function LogIn() {
           <button
             type="button"
             onClick={() => setIsLogin(!isLogin)}
-            className="text-blue-500 hover:underline"
+            className="text-(--primaryColor) hover:underline"
           >
             {isLogin ? 'Sign Up' : 'Login'}
           </button>

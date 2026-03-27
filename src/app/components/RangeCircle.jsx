@@ -69,7 +69,7 @@ export default function RangeCircle({ totals }) {
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
 
-          <p className="text-sm text-black">Natitirang di bayad</p>
+          <p className="text-sm text-black">Remaining Unpaid</p>
 
           <p className="text-xl font-bold">
             ₱{(totalAllLent - totalAllCollection).toLocaleString()}
@@ -83,12 +83,12 @@ export default function RangeCircle({ totals }) {
 
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 bg-(--secondaryColor) rounded-full"></span>
-          Pinautang
+          Total Lent
         </div>
 
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 bg-(--tertiaryColor) rounded-full"></span>
-          Nasingil
+          Total Collection
         </div>
 
       </div>
