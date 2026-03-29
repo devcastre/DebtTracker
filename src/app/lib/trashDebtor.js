@@ -13,7 +13,7 @@ export default function useTrashDebtor() {
     String(now.getMinutes()).padStart(2, '0') + ':' +
     String(now.getSeconds()).padStart(2, '0');
 
-    const trashDebtor = async (id, balance) => {
+    const trashDebtor = async (id, balance, user_id) => {
 
         try {
 
@@ -22,7 +22,7 @@ export default function useTrashDebtor() {
                 .from('transactions')
                 .insert([
                     {
-                        user_id: user.id,
+                        user_id: user_id,
                         debtor_id: id,
                         type: 'payment',
                         amount: balance,

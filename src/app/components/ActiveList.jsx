@@ -71,11 +71,11 @@ export default function ActiveList({data}) {
 
     const { trashDebtor } = useTrashDebtor();
 
-    const handleTrash = async (id, balance) => {
+    const handleTrash = async (id, balance, user_id) => {
 
         if(balance > 0){
             setConfirmAction(() => async () => {
-                await trashDebtor(id, balance);
+                await trashDebtor(id, balance, user_id);
                 setList(prev => prev.filter(d => d.id !== id));      
                 closeModal();          
             })
@@ -90,6 +90,8 @@ export default function ActiveList({data}) {
 
 
     if(!processeddata) return <div>No Debtors Exist</div>
+
+    console.log(processeddata);
 
 
   return (
@@ -115,7 +117,7 @@ export default function ActiveList({data}) {
                             <span className='px-2'>{d.name}</span>
                             <div className='px-4 py-1 w-36 rounded-md bg-white text-black shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.75)]'>₱ {d.balance}</div>
                         </Link> 
-                        <button onClick={() => handleTrash(d.id, d.balance)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                        <button onClick={() => handleTrash(d.id, d.balance, d.user_id)} className='flex gap-2 w-full p-2 bg-(--quaternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                             <Image
                             src='/Icons/trashIconW.svg'
                             alt="restoreIcon"
