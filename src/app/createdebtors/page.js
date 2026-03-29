@@ -147,12 +147,15 @@ export default function CreateDebtors() {
                 </button>
 
                 {success && (
-                    <div>
-                        <Link href={`/creditorshub`}>
-                        Go back to Main List
-                        </Link> 
-                        <p>Debtors added successfully!</p>
-                    </div>
+                    <div className='flex flex-col gap-6'>
+                        <p>✅ Debtors added successfully!</p>
+                        <Link 
+                            href={`/creditorshub`} 
+                            className="text-(--primaryColor) hover:text-(--secondaryColor) transition"
+                        >
+                            ←  Back to Main List
+                        </Link>
+                    </div>                    
                 )}
 
             </form>            

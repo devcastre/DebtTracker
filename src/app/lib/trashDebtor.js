@@ -44,8 +44,8 @@ export default function useTrashDebtor() {
             return data;
 
         } catch (error) {
-            console.error("Error trashing debtor:", err);
-            throw err;            
+            console.error("Error trashing debtor:", error);
+            throw error;            
         }
     }
 

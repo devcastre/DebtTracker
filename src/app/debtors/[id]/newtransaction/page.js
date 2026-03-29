@@ -91,11 +91,14 @@ export default function TransactionForm() {
           </button>
 
           {success && (
-            <div>
-              <Link href={`/debtors/${debtorId}`}>
-                Go back to Profile
+            <div className='flex flex-col gap-6'>
+              <p>✅ Transaction added successfully!</p>
+              <Link 
+                href={`/debtors/${debtorId}`} 
+                className="text-(--primaryColor) hover:text-(--secondaryColor) transition"
+              >
+                ←  Back to Profile
               </Link>
-              <p>Transaction added successfully!</p>
             </div>
           )}
 

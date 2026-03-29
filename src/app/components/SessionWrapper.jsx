@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { BottomNav, Sidebar } from './SwitchingNavbar'
 import LandingPage from './LandingPage'
@@ -10,25 +10,35 @@ export default function SessionWrapper({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
+  const wasLoggedIn = useRef(false)
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       const currentUser = session?.user ?? null
       setUser(currentUser)
+      wasLoggedIn.current = !!currentUser
       setLoading(false)
+    })
 
-      if (currentUser) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      const currentUser = session?.user ?? null
+      setUser(currentUser)
+
+      if (currentUser && !wasLoggedIn.current) {
+
         router.replace('/dashboard')
-      } else {
+      } else if (!currentUser && wasLoggedIn.current) {
+
         router.replace('/')
       }
+
+      wasLoggedIn.current = !!currentUser
     })
 
     return () => subscription.unsubscribe()
   }, [router])
 
   if (loading) return <p>Loading...</p>
-
   if (!user) return <LandingPage />
 
   return (
