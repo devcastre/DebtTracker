@@ -18,7 +18,8 @@ export default function LogIn() {
 
   const cleanEmail = email.trim().toLowerCase();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setErrorMsg('');
     const { data, error } = await supabase.auth.signInWithPassword({ 
@@ -37,7 +38,8 @@ export default function LogIn() {
   };
 
 
-  const handleSignup = async () => {
+  const handleSignup = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setErrorMsg('');
     const { data, error } = await supabase.auth.signUp({ 
@@ -63,7 +65,7 @@ export default function LogIn() {
 
       {errorMsg && <p className="text-red-500 mb-4 text-center">{errorMsg}</p>}
 
-      <form className="flex flex-col gap-5">
+      <form className="flex flex-col gap-5" onSubmit={isLogin ? handleLogin : handleSignup}>
         <div className="grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2">
           <label htmlFor="email" className="mb-1 text-base font-medium text-gray-700">
             Email:
@@ -95,8 +97,7 @@ export default function LogIn() {
         </div>
 
         <button
-          type="button"
-          onClick={isLogin ? handleLogin : handleSignup}
+          type="submit"
           disabled={loading}
           className="w-full bg-(--primaryColor) text-white hover:text-(--primaryColor) py-3 rounded-md hover:bg-(--tertiaryColor) transition-colors duration-200 shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]"
         >
