@@ -2,11 +2,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e2e2e2;
+  --background: #e0e0e0;
   --primaryColor: #0D776F;
   --secondaryColor: #12aa9f;
-  --tertiaryColor: #1CF7B9;
-  --quaternaryColor: #7A1E2C;
+  --tertiaryColor: #1ae131;
+  --quarternaryColor: #7A1E2C;
   
   --primary-gradient: linear-gradient(135deg, #0D776F 40%, #12AA9F 60%);
 

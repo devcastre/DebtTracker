@@ -1,21 +1,11 @@
 'use client'
 
 import React from 'react'
+import { calcRangeCircle } from '../utils/calcRangeCircle'
 
 export default function RangeCircle({ totals }) {
 
-  const totalAllLent = totals?.totalLent || 0
-  const totalAllCollection = totals?.totalCollected || 0
-
-  const radius = 70
-  const circumference = 2 * Math.PI * radius
-
-  const lentPercent = 100
-
-  const collectedPercent =
-    totalAllLent > 0
-      ? Math.min((totalAllCollection / totalAllLent) * 100, 100)
-      : 0
+  const { totalAllLent, totalAllCollection, radius, circumference, lentPercent, collectedPercent } = calcRangeCircle(totals)
 
   const lentOffset =
     circumference - (lentPercent / 100) * circumference
@@ -24,7 +14,7 @@ export default function RangeCircle({ totals }) {
     circumference - (collectedPercent / 100) * circumference
 
   return (
-    <div className="flex flex-row items-center gap-4 w-100 justify-center">
+    <div className="flex flex-col lg:flex-row items-center p-6 gap-x-5 gap-y-8 w-auto justify-center">
 
       <div className="relative w-48 h-48">
 
@@ -79,7 +69,7 @@ export default function RangeCircle({ totals }) {
 
       </div>
 
-      <div className="flex flex-col gap-6 text-sm">
+      <div className="flex flex-row lg:flex-col gap-6 text-sm">
 
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 bg-(--secondaryColor) rounded-full"></span>

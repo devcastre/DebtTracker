@@ -4,10 +4,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from '@/app/lib/supabase';
 import RangeCircle from "@/app/components/RangeCircle";
+import TransactionsChart from "../components/TransactionsChart";
 
 export default function Dashboard() {
 
-
+  const [transactions, setTransactions] = useState([])
   const [debtors, setDebtors] = useState({sortedDebtFreq: [], sortedLent: [], sortedCollection: []})
   const [totals, setTotals] = useState([])
 
@@ -20,12 +21,17 @@ export default function Dashboard() {
         .from('debtors')
         .select('*, transactions (*)')
         .eq('user_id', user.id);
-    
+      
+      
+
       if (error) {
         console.error('Error fetching active debtors:', error)
         return
       }
 
+        const allTransactions = data.flatMap(d => d.transactions || []);
+
+        setTransactions(allTransactions);
 
         const totalData = data.reduce((acc, debtor) => {
 
@@ -85,48 +91,47 @@ export default function Dashboard() {
     getDebtorDashboard()
   }, [])
 
-  console.log(debtors.sortedCollection)
-
 
   return (
-    <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 w-full flex flex-col gap-24'>
-      <div className="flex flex-wrap items-center gap-6 justify-center lg:justify-between">
-        <h1 className="text-(--primaryColor) text-4xl sm:text-5xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">Dashboard</h1>
+    <main className='px-6 pt-10 pb-32 md:pb-10 md:px-8 lg:px-12 w-full flex flex-col gap-12 md:gap-8'>
+      <h1 className="text-(--primaryColor) mb-0 text-3xl sm:text-4xl w-full text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">Dashboard</h1>
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] items-center gap-6 justify-center lg:justify-between">
         <RangeCircle totals={totals}/>
+        <TransactionsChart transactions={transactions}/>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center md:justify-between">
-        <div className="flex flex-col gap-4 p-4 min-h-64 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
+        <div className="flex flex-col gap-3 p-3 min-h-64 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor) h-14">Largest Debt</h4>
           {debtors.sortedLent.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (
               <ul className="flex flex-col gap-2 h-full mt-auto">
                 {debtors.sortedLent.map(obj => (
-                  <li key={obj.id} className="mx-1 p-3 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfDebt}</span></li>
+                  <li key={obj.id} className="mx-1 p-2 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfDebt}</span></li>
                 ))}
               </ul>
           )}
         </div>
-        <div className="flex flex-col gap-4 p-4 min-h-64 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
+        <div className="flex flex-col gap-3 p-3 min-h-60 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor) h-14">Largest Payment</h4>
           {debtors.sortedCollection.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (          
               <ul className="flex flex-col gap-2 h-full mt-auto">
                 {debtors.sortedCollection.map(obj => (
-                  <li key={obj.id} className="mx-1 p-3 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfPayment}</span></li>
+                  <li key={obj.id} className="mx-1 p-2 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfPayment}</span></li>
                 ))}
               </ul>
           )}
         </div>
-        <div className="flex flex-col gap-4 p-4 min-h-64 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
+        <div className="flex flex-col gap-3 p-3 min-h-64 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
           <h4 className="text-(--primaryColor) h-14">Most Frequent Borrower</h4>
           {debtors.sortedDebtFreq.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (
               <ul className="flex flex-col gap-2 h-full mt-auto">
                 {debtors.sortedDebtFreq.map(obj => (
-                  <li key={obj.id} className="mx-1 p-3 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.debtLength} Beses</span></li>
+                  <li key={obj.id} className="mx-1 p-2 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.debtLength} Beses</span></li>
                 ))}
               </ul>
           )}   

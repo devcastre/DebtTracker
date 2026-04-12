@@ -85,7 +85,7 @@ export default function TransactionForm() {
 
           <button
             type="submit"
-            className='w-full p-2 bg-(--primaryColor) hover:bg-(--tertiaryColor) text-white hover:text-(--primaryColor) rounded-md shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
+            className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-md shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
           >
             Add Transaction
           </button>
