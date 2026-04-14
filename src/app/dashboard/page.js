@@ -97,43 +97,53 @@ export default function Dashboard() {
       <h1 className="text-(--primaryColor) mb-0 text-3xl sm:text-4xl w-full text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]">Dashboard</h1>
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] items-center gap-6 justify-center lg:justify-between">
         <RangeCircle totals={totals}/>
-        <TransactionsChart transactions={transactions}/>
+        <div className="flex flex-col items-start">
+          <h4 className="text-(--primaryColor)">Transaction Chart</h4>
+          <TransactionsChart transactions={transactions}/>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center md:justify-between">
-        <div className="flex flex-col gap-3 p-3 min-h-64 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
-          <h4 className="text-(--primaryColor) h-14">Largest Debt</h4>
+        <div className="flex flex-col">
+          <h4 className="text-(--primaryColor)">Largest Debt</h4>
           {debtors.sortedLent.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (
-              <ul className="flex flex-col gap-2 h-full mt-auto">
-                {debtors.sortedLent.map(obj => (
-                  <li key={obj.id} className="mx-1 p-2 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfDebt}</span></li>
-                ))}
-              </ul>
+              <div className="p-1.5 h-full min-h-60 max-h-64 mt-auto rounded-lg shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]">
+                <ul className="flex flex-col h-full bg-(--background) p-3 rounded-lg shadow-[2px_2px_2px_0px_rgba(0,0,0,0.5),-2px_-2px_2px_0px_rgba(255,255,255,0.75)] divide-y-2 divide-(--primaryColor)">
+                  {debtors.sortedLent.map((obj, index) => (
+                    <li key={obj.id} className="p-4 text-(--primaryColor) flex flex-row justify-between item-center gap-3"><span className="text-base h-fit font-medium">{index + 1}. {obj.name}</span><span className="text-white bg-(--primaryColor) rounded-sm py-0.5 px-1.5 h-7">₱ {obj.sumOfDebt}</span></li>
+                  ))}
+                </ul>
+              </div>
+
           )}
         </div>
-        <div className="flex flex-col gap-3 p-3 min-h-60 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
-          <h4 className="text-(--primaryColor) h-14">Largest Payment</h4>
+        <div className="flex flex-col">
+          <h4 className="text-(--primaryColor)">Largest Payment</h4>
           {debtors.sortedCollection.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (          
-              <ul className="flex flex-col gap-2 h-full mt-auto">
-                {debtors.sortedCollection.map(obj => (
-                  <li key={obj.id} className="mx-1 p-2 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.sumOfPayment}</span></li>
-                ))}
-              </ul>
+              <div className="p-1.5 h-full min-h-60 max-h-64 mt-auto rounded-lg shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]">
+                <ul className="flex flex-col h-full bg-(--background) p-3 rounded-lg shadow-[2px_2px_2px_0px_rgba(0,0,0,0.5),-2px_-2px_2px_0px_rgba(255,255,255,0.75)] divide-y-2 divide-(--primaryColor)">
+                  {debtors.sortedCollection.map((obj, index) => (
+                    <li key={obj.id} className="p-4 text-(--primaryColor) flex flex-row justify-between item-center gap-3"><span className="text-base h-fit font-medium">{index + 1}. {obj.name}</span><span className="text-white bg-(--primaryColor) rounded-sm py-0.5 px-1.5 h-7">₱ {obj.sumOfPayment}</span></li>
+                  ))}
+                </ul>                
+              </div>
           )}
         </div>
-        <div className="flex flex-col gap-3 p-3 min-h-64 rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">
-          <h4 className="text-(--primaryColor) h-14">Most Frequent Borrower</h4>
+        <div className="flex flex-col">
+          <h4 className="text-(--primaryColor)">Top Borrower</h4>
           {debtors.sortedDebtFreq.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (
-              <ul className="flex flex-col gap-2 h-full mt-auto">
-                {debtors.sortedDebtFreq.map(obj => (
-                  <li key={obj.id} className="mx-1 p-2 bg-(--primaryColor) text-white flex flex-row justify-between rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]"><span>{obj.name}</span><span>{obj.debtLength} Beses</span></li>
-                ))}
-              </ul>
+              <div className="p-1.5 h-full min-h-60 max-h-64 mt-auto rounded-lg shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]">
+                <ul className="flex flex-col h-full bg-(--background) p-3 rounded-lg shadow-[2px_2px_2px_0px_rgba(0,0,0,0.5),-2px_-2px_2px_0px_rgba(255,255,255,0.75)] divide-y-2 divide-(--primaryColor)">
+                  {debtors.sortedDebtFreq.map((obj, index) => (
+                    <li key={obj.id} className="p-4 text-(--primaryColor) flex flex-row justify-between item-center gap-3"><span className="text-base h-fit font-medium">{index + 1}. {obj.name}</span><span className="text-white bg-(--primaryColor) rounded-sm py-0.5 px-1.5 h-7">{obj.debtLength}x</span></li>
+                  ))}
+                </ul>
+              </div>
           )}   
         </div>        
              

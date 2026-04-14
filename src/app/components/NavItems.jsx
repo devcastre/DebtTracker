@@ -14,7 +14,7 @@ export function NavItems({ mobile = false }) {
   const pathname = usePathname();
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <ul       
       className={
         mobile
