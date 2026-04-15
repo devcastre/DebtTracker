@@ -29,6 +29,8 @@ export default function DebtorsProfilePage() {
 
         if (error) {
           console.error(error)
+          setDebtor(null)
+          setLoading(false)
           return
         }
 

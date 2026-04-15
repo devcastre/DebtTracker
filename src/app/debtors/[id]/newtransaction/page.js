@@ -37,7 +37,7 @@ export default function TransactionForm() {
   };
 
   return (
-    <main className='p-6 flex w-full h-dvh items-center justify-center'>
+    <main className='px-6 pt-6 pb-32 md:pb-6 flex w-full h-dvh items-center justify-center'>
       <div className='p-6 w-full max-w-md bg-white shadow-lg rounded-md'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
 
