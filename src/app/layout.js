@@ -1,6 +1,6 @@
 import { Lato, Poppins } from "next/font/google";
-import "./globals.css";
-import SessionWrapper from "./components/SessionWrapper";
+import "@/app/globals.css";
+import SessionWrapper from "@/app/components/SessionWrapper";
 
 
 const poppins = Poppins({

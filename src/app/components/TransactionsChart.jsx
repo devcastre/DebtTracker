@@ -11,7 +11,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import { groupByMonth } from "../utils/calcTransactionsChart";
+import { groupByMonth } from "@/app/utils/calcTransactionsChart";
 
 export default function TransactionsChart({ transactions }) {
   const data = groupByMonth(transactions);

@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from '@/app/lib/supabase';
 import RangeCircle from "@/app/components/RangeCircle";
-import TransactionsChart from "../components/TransactionsChart";
+import TransactionsChart from "@/app/components/TransactionsChart";
 
 export default function Dashboard() {
 

@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
-import { supabase } from '../lib/supabase'
-import { BottomNav, Sidebar } from './SwitchingNavbar'
-import LandingPage from './LandingPage'
+import { supabase } from '@/app/lib/supabase'
+import { BottomNav, Sidebar } from '@/app/components/SwitchingNavbar'
+import LandingPage from '@/app/components/LandingPage'
 import { useRouter } from 'next/navigation'
 
 export default function SessionWrapper({ children }) {

@@ -1,5 +1,6 @@
 'use client'
 
+import { exportDebtorDetails } from '@/app/lib/excelExport';
 import { supabase } from '@/app/lib/supabase';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -87,6 +88,9 @@ export default function DebtorsProfilePage() {
 
   if (!debtor) notFound();
 
+  console.log("debtor :", debtor)
+  console.log("balance :", balance)
+
   return (
     <main className='px-6 pt-6 pb-32 md:p-12 w-full flex flex-col gap-5'>       
       <div className='flex flex-col xs:flex-row xs:justify-between xs:gap-0 gap-8'>
@@ -133,15 +137,27 @@ export default function DebtorsProfilePage() {
           )}
         </div>        
       </div>
-      <Link href={`/debtors/${debtor.id}/newtransaction`} className='bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)] gap-2'>
+      <div className='flex flex-col md:flex-row gap-5 md:gap-12'>
+        <button onClick={() => exportDebtorDetails(debtor, balance)} className="bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]">
+          <Image
+            src='/Icons/downloadIconW.svg'
+            alt="downloadIcon"
+            width={30}
+            height={30}
+          />              
+          Debtor Details
+        </button>
+        <Link href={`/debtors/${debtor.id}/newtransaction`} className='bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'>
           <Image
             src='/Icons/addIconW.svg'
             alt="addIcon"
             width={30}
             height={30}
           />
-          Add Transaction
-      </Link>
+            Add Transaction
+        </Link>
+      </div>
+
 
 
     </main>

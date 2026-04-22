@@ -19,3 +19,27 @@ export function exportDebtorsToExcel(debtors) {
   const blob = new Blob([excelBuffer], { type: "application/octet-stream" })
   saveAs(blob, "ActiveDebtors.xlsx")
 }
+
+export function exportDebtorDetails(debtor, balance) {
+  if (!debtor) return
+
+  const ws = XLSX.utils.aoa_to_sheet([
+    ["Name", debtor.name],
+    ["Contact", debtor.contact],
+    ["Balance", balance],
+    [],
+    ["Date", "Amount", "Type"],
+    ...debtor.transactions.map(t => [
+      t.date,
+      t.amount,
+      t.type
+    ])
+  ])
+
+  const workbook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(workbook, ws, "Debtor Details")
+
+  const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+  const blob = new Blob([excelBuffer], { type: "application/octet-stream" })
+  saveAs(blob, "DebtorInfo.xlsx")
+}

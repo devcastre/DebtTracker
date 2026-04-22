@@ -2,7 +2,7 @@
 
 
 import React from 'react'
-import LogIn from './LogIn'
+import LogIn from '@/app/components/LogIn'
 
 export default function LandingPage() {
   return (

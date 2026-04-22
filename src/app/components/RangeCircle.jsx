@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { calcRangeCircle } from '../utils/calcRangeCircle'
+import { calcRangeCircle } from '@/app/utils/calcRangeCircle'
 
 export default function RangeCircle({ totals }) {
 
