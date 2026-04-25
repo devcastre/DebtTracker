@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import ListControls from '@/app/components/ListControls';
 import Link from 'next/link';
 import Image from 'next/image';
-import useTrashDebtor from '@/app/lib/trashDebtor';
+import useTrashDebtor from '@/app/hooks/trashDebtor';
 import Modal from '@/app/components/Modal';
 
 export default function ActiveList({data}) {

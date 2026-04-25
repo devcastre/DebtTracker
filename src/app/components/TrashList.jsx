@@ -2,8 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import ListControls from '@/app/components/ListControls'
-import useRestoreDebtor from '@/app/lib/restoreDebtor';
-import usePermaDeleteDebtor from '@/app/lib/permaDeleteDebtor';
+import useRestoreDebtor from '@/app/hooks/restoreDebtor';
+import usePermaDeleteDebtor from '@/app/hooks/permaDeleteDebtor';
 import Image from 'next/image';
 
 export default function TrashList({data}) {

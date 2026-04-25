@@ -1,6 +1,6 @@
 'use client'
 
-import { exportDebtorDetails } from '@/app/lib/excelExport';
+import { exportDebtorDetails } from '@/app/services/excelExport';
 import { supabase } from '@/app/lib/supabase';
 import Image from 'next/image';
 import Link from 'next/link';

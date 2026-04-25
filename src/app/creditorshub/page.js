@@ -5,7 +5,7 @@ import { supabase } from '@/app/lib/supabase'
 import ActiveList from '@/app/components/ActiveList'
 import Link from 'next/link'
 import Image from 'next/image'
-import { exportDebtorsToExcel } from '@/app/lib/excelExport'
+import { exportDebtorsToExcel } from '@/app/services/excelExport'
 
 export default function CreditorsHub() {
   const [debtors, setDebtors] = useState([])
