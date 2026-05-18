@@ -1,8 +1,10 @@
 'use client'
 
-import { supabase } from "@/app/lib/supabase";
+import { createClient } from "@/src/app/lib/client";
 
 export default function usePermaDeleteDebtor() {
+
+    const supabase = createClient();
 
     const deletePermanent = async (id) => {
 

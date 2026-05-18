@@ -2,11 +2,13 @@
 
 
 import React, { useState } from 'react'
-import { supabase } from '@/app/lib/supabase';
+
 import Link from 'next/link';
+import { createClient } from '@/src/app/lib/client';
 
 export default function CreateDebtors() {
 
+    const supabase = createClient();
 
     const [form, setForm] = useState({
         name: '',

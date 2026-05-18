@@ -4,11 +4,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/app/lib/supabase';
+import { createClient} from '@/src/app/lib/client';
 
 
 export default function LogIn() {
+
+  const supabase = createClient();
   const router = useRouter();
+
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

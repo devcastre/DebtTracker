@@ -1,6 +1,7 @@
+
+
 import { Lato, Poppins } from "next/font/google";
-import "@/app/globals.css";
-import SessionWrapper from "@/app/components/SessionWrapper";
+import "@/src/app/globals.css";
 
 
 const poppins = Poppins({
@@ -29,9 +30,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.variable} ${lato.variable} antialiased min-h-screen flex flex-col md:flex-row`}
       >
-        <SessionWrapper>
+
           {children}
-        </SessionWrapper>
+
 
       </body>
     </html>

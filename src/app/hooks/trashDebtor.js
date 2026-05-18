@@ -1,8 +1,10 @@
 'use client'
 
-import { supabase } from "@/app/lib/supabase";
+import { createClient} from "@/src/app/lib/client";
 
 export default function useTrashDebtor() {
+
+    const supabase = createClient();
 
     const now = new Date();
 

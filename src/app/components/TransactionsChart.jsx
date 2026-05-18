@@ -1,4 +1,4 @@
-
+'use client'
 
 import {
   LineChart,
@@ -11,12 +11,13 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import { groupByMonth } from "@/app/utils/calcTransactionsChart";
+import { groupByMonth } from "@/src/app/utils/calcTransactionsChart";
 
 export default function TransactionsChart({ transactions }) {
+
+
   const data = groupByMonth(transactions);
 
-  console.log(data)
 
   return (
     <div className="flex flex-col items-center pb-4 pt-6 md:py-6 pl-0 pr-6 gap-4 w-full h-64 justify-center rounded-lg shadow-[inset_4px_4px_2px_rgba(0,0,0,0.4),inset_-4px_-4px_2px_rgba(255,255,255)]">

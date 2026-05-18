@@ -1,16 +1,18 @@
 'use client'
 
 
-import React, { useEffect, useMemo, useState } from 'react'
-import ListControls from '@/app/components/ListControls';
+import ListControls from '@/src/app/components/ListControls';
 import Link from 'next/link';
 import Image from 'next/image';
-import useTrashDebtor from '@/app/hooks/trashDebtor';
-import Modal from '@/app/components/Modal';
+import useTrashDebtor from '@/src/app/hooks/trashDebtor';
+import Modal from '@/src/app/components/Modal';
+import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
 
-export default function ActiveList({data}) {
+export default function ActiveList({debtors}) {
 
-    const [list, setList] = useState(data);
+    const safeDebtors = debtors ?? [];
+    const router = useRouter();
 
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('');
@@ -22,10 +24,6 @@ export default function ActiveList({data}) {
         setOpenModal(false);
         setConfirmAction(null);
     };
-
-    useEffect(() => {
-        setList(data);
-    }, [data]);
 
 
     const sortoptions = [
@@ -56,7 +54,7 @@ export default function ActiveList({data}) {
 
     const processeddata = useMemo(() => {
 
-        let filtered = list.filter(d => d.name.toLowerCase().includes(search.toLowerCase()))
+        let filtered = safeDebtors.filter(d => d.name.toLowerCase().includes(search.toLowerCase()))
 
         if(sort && sortFunctions[sort]){
             return [...filtered].sort(sortFunctions[sort])
@@ -64,7 +62,7 @@ export default function ActiveList({data}) {
 
         return filtered
 
-    }, [list, sort, search])
+    }, [safeDebtors, sort, search])
 
 
 
@@ -76,7 +74,7 @@ export default function ActiveList({data}) {
         if(balance > 0){
             setConfirmAction(() => async () => {
                 await trashDebtor(id, balance, user_id);
-                setList(prev => prev.filter(d => d.id !== id));      
+                router.refresh();     
                 closeModal();          
             })
 
@@ -84,14 +82,12 @@ export default function ActiveList({data}) {
         }
         else{
             await trashDebtor(id, 0);
-            setList(prev => prev.filter(d => d.id !== id));
+            router.refresh();
         }
     };    
 
 
     if(!processeddata) return <div>No Debtors Exist</div>
-
-    console.log(processeddata);
 
 
   return (
@@ -113,11 +109,11 @@ export default function ActiveList({data}) {
             <ul className='flex flex-col gap-5'>
                 {processeddata.map(d => (
                     <li key={d.id} className='grid grid-cols-1 lg:grid-cols-[4fr_1fr] gap-2 lg:gap-6'>
-                        <Link href={`/debtors/${d.id}`} className='flex flex-row items-center justify-between p-2 bg-(--primaryColor) text-white rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                        <Link href={`/creditorshub/debtors/${d.id}`} className='flex flex-row items-center justify-between p-2 bg-(--primaryColor) text-white rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                             <span className='px-2'>{d.name}</span>
                             <div className='px-4 py-1 w-36 rounded-md bg-white text-black shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.75)]'>₱ {d.balance}</div>
                         </Link> 
-                        <button onClick={() => handleTrash(d.id, d.balance, d.user_id)} className='flex gap-2 w-full p-2 bg-(--quarternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                        <button onClick={() => handleTrash(d.id, d.balance)} className='flex gap-2 w-full p-2 bg-(--quarternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                             <Image
                             src='/Icons/trashIconW.svg'
                             alt="restoreIcon"

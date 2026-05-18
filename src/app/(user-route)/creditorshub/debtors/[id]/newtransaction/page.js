@@ -1,11 +1,15 @@
 'use client'
 
-import { supabase } from '@/app/lib/supabase';
+
+import { createClient } from '@/src/app/lib/client';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useState } from 'react'
 
 export default function TransactionForm() {
+
+  const supabase = createClient();
+
   const { id: debtorId } = useParams();
 
   const [type, setType] = useState('debt');

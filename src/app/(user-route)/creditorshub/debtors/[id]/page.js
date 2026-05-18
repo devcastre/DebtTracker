@@ -1,95 +1,16 @@
-'use client'
 
-import { exportDebtorDetails } from '@/app/services/excelExport';
-import { supabase } from '@/app/lib/supabase';
+
+import ExportDebtorDetailBtn from '@/src/app/components/ExportDebtorDetailBtn';
+import { getDebtorById } from '@/src/app/lib/getDebtorById';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound, useParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-
-export default function DebtorsProfilePage() {
-
-    const params = useParams();
-    const id = params.id
-
-    const [debtor, setDebtor] = useState(null)
-    const [balance, setBalance] = useState(0)
-    const [loading, setLoading] = useState(true)
 
 
-    useEffect(() => {
-      async function getDebtorById() {
+export default async function DebtorsProfilePage({params}) {
 
-        const { data: { user } } = await supabase.auth.getUser();
-        const {data, error } = await supabase
-          .from("debtors")
-          .select(`*, transactions(*)`)
-          .eq("user_id", user.id)
-          .eq("id", id)
-          .single()
+    const {id} = await params;
+    const {debtor, balance, recentPayment, recentDebt} = await getDebtorById(id);
 
-        if (error) {
-          console.error(error)
-          setDebtor(null)
-          setLoading(false)
-          return
-        }
-
-        if (!data) return
-
-        const remainingBalance = data.transactions.reduce((total, t) => {
-
-            if (t.type === 'debt'){
-                const interest = t.interest_rate ? t.amount * (t.interest_rate / 100) : 0
-                return total + t.amount + interest
-            }
-
-            if (t.type === 'payment'){
-                return total - t.amount
-            }
-
-            return total
-
-        }, 0)
-
-        setDebtor(data)
-        setBalance(remainingBalance)
-        setLoading(false)
-
-
-      }
-
-      if (id) {
-        getDebtorById()
-      }
-
-    }, [id])
-
-
-
-  const transactions = debtor?.transactions || [];
-
-  const sorted = [...transactions].sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
-
-  const recentPayment = sorted
-    .filter(t => t.type === 'payment')
-    .slice(0, 3);
-
-  const recentDebt = sorted
-    .filter(t => t.type === 'debt')
-    .slice(0, 3);
-
-
-
-
-  if (loading) return <div>Loading...</div>
-
-  if (!debtor) notFound();
-
-  console.log("debtor :", debtor)
-  console.log("balance :", balance)
 
   return (
     <main className='px-6 pt-6 pb-32 md:p-12 w-full flex flex-col gap-5'>       
@@ -138,16 +59,8 @@ export default function DebtorsProfilePage() {
         </div>        
       </div>
       <div className='flex flex-col md:flex-row gap-5 md:gap-12'>
-        <button onClick={() => exportDebtorDetails(debtor, balance)} className="bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]">
-          <Image
-            src='/Icons/downloadIconW.svg'
-            alt="downloadIcon"
-            width={30}
-            height={30}
-          />              
-          Debtor Details
-        </button>
-        <Link href={`/debtors/${debtor.id}/newtransaction`} className='bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'>
+        <ExportDebtorDetailBtn debtor={debtor} balance={balance}/>
+        <Link href={`/creditorshub/debtors/${debtor.id}/newtransaction`} className='bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'>
           <Image
             src='/Icons/addIconW.svg'
             alt="addIcon"

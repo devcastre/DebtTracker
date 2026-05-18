@@ -1,8 +1,7 @@
 'use client'
 
 
-import React from 'react'
-import LogIn from '@/app/components/LogIn'
+import LogIn from '@/src/app/components/LogIn'
 
 export default function LandingPage() {
   return (

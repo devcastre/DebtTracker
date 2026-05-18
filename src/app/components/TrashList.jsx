@@ -1,20 +1,19 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
-import ListControls from '@/app/components/ListControls'
-import useRestoreDebtor from '@/app/hooks/restoreDebtor';
-import usePermaDeleteDebtor from '@/app/hooks/permaDeleteDebtor';
+import { useMemo, useState } from 'react'
+import ListControls from '@/src/app/components/ListControls'
+import useRestoreDebtor from '@/src/app/hooks/restoreDebtor';
+import usePermaDeleteDebtor from '@/src/app/hooks/permaDeleteDebtor';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-export default function TrashList({data}) {
+export default function TrashList({debtors}) {
+
+    const safeDebtors = debtors ?? [];
+    const router = useRouter();
 
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('');
-    const [list, setList] = useState(data)
-
-    useEffect(() => {
-        setList(data);
-    }, [data]);
 
     const sortoptions = [
         { value: 'name', label: 'ABCD...' },
@@ -30,10 +29,9 @@ export default function TrashList({data}) {
         },
     }
 
-
     const processeddata = useMemo(() => {
 
-        let filtered = list.filter(d => d.name.toLowerCase().includes(search.toLowerCase()))
+        let filtered = safeDebtors.filter(d => d.name.toLowerCase().includes(search.toLowerCase()))
 
         if(sort && sortFunctions[sort]){
             return [...filtered].sort(sortFunctions[sort])
@@ -41,7 +39,7 @@ export default function TrashList({data}) {
 
         return filtered
 
-    }, [list, sort, search])  
+    }, [safeDebtors, sort, search])  
     
     
 
@@ -51,7 +49,7 @@ export default function TrashList({data}) {
 
         try {
             await restoreDebtor(id);
-            setList(prev => prev.filter(d => d.id !== id));
+            router.refresh();
         } 
         catch (err) {
             console.error(err);
@@ -63,7 +61,7 @@ export default function TrashList({data}) {
 
         try {
             await deletePermanent(id);
-            setList(prev => prev.filter(d => d.id !== id));
+            router.refresh();
         } 
         catch (err) {
             console.error(err);
