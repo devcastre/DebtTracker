@@ -17,7 +17,7 @@ export default function NotFound() {
 
         <Link
           href="/dashboard"
-          className="inline-block mt-6 px-6 py-3 rounded-md bg-(--primaryColor) text-white font-medium hover:bg-(--secondaryColor) transition"
+          className="inline-block mt-6 px-6 py-3 rounded-sm bg-(--primaryColor) text-white font-medium hover:bg-(--secondaryColor) transition"
         >
           Back to Dashboard
         </Link>

@@ -25,7 +25,7 @@ export default async function DebtorsProfilePage({params}) {
         </div>  
       </div>
 
-      <div className='flex flex-col bg-white rounded-lg p-6 gap-12'>
+      <div className='flex flex-col bg-white rounded-sm p-6 gap-12'>
         <div className='flex flex-col gap-3 w-full'>
           <h4 className='text-(--primaryColor) text-center border-3 border-(--primaryColor)/50 p-1 rounded-sm'>Recent Debt:</h4>
           {recentDebt.length === 0 ? (

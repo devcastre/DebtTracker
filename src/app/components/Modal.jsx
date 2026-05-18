@@ -7,7 +7,7 @@ export default function Modal({isOpen, onCancel, onConfirm, debtors}) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-6 rounded-sm shadow-md">
         <p className="mb-4">
           This debtor still has a remaining balance. Proceed will settle it.
         </p>

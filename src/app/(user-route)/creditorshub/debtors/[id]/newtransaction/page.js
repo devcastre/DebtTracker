@@ -42,7 +42,7 @@ export default function TransactionForm() {
 
   return (
     <main className='px-6 pt-6 pb-32 md:pb-6 flex w-full h-dvh items-center justify-center'>
-      <div className='p-6 w-full max-w-md bg-white shadow-lg rounded-md'>
+      <div className='p-6 w-full max-w-md bg-white shadow-lg rounded-sm'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
 
           <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
@@ -52,7 +52,7 @@ export default function TransactionForm() {
             <select
               value={type}
               onChange={e => setType(e.target.value)}
-              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 pl-4 text-base font-medium text-[#6B7280] outline-none focus:border-(--tertiaryColor) focus:shadow-md'
+              className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 pl-4 text-base font-medium text-[#6B7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
             >
               <option value="debt">Debt</option>
               <option value="payment">Payment</option>
@@ -69,7 +69,7 @@ export default function TransactionForm() {
               onChange={e => setAmount(e.target.value)}
               placeholder="Amount"
               required
-              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-(--tertiaryColor) focus:shadow-md'
+              className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-4 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
             />
           </div>
 
@@ -83,13 +83,13 @@ export default function TransactionForm() {
               onChange={e => setDate(e.target.value)}
               placeholder='dd/mm/yyyy'
               required
-              className='w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-(--tertiaryColor) focus:shadow-md'
+              className='w-full bg-(--background) rounded-sm border border-[#e0e0e0]  py-3 px-4 text-base font-medium text-[#6B7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
             />
           </div>
 
           <button
             type="submit"
-            className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-md shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
+            className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
           >
             Add Transaction
           </button>

@@ -72,7 +72,7 @@ export default function TrashList({debtors}) {
 
   return (
     
-    <div className='flex flex-col bg-white rounded-lg p-6 gap-12'>
+    <div className='flex flex-col bg-white rounded-sm p-6 gap-12'>
         <div className='flex flex-col gap-6 item-center md:items-start'>
             <h3 className='text-(--primaryColor) font-medium md:whitespace-nowrap'>List of Trashed Debtors</h3>
             <ListControls
@@ -89,9 +89,9 @@ export default function TrashList({debtors}) {
             <ul className='flex flex-col gap-5'>
                 {processeddata.map(d => (
                     <li key={d.id} className='grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-2 lg:gap-6'>
-                        <span className='p-2 bg-(--primaryColor) text-white text-center lg:text-start rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>{d.name}</span>
+                        <span className='p-2 bg-(--primaryColor) text-white text-center lg:text-start rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>{d.name}</span>
                         <div className='flex flex-row gap-2'>
-                            <button onClick={(e) => handleRestore(d.id)} className='flex gap-2 w-full p-2 bg-(--secondaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                            <button onClick={(e) => handleRestore(d.id)} className='flex gap-2 w-full p-2 bg-(--secondaryColor) text-white items-center justify-center rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                                 <Image
                                 src='/Icons/restoreIconW.svg'
                                 alt="restoreIcon"
@@ -100,7 +100,7 @@ export default function TrashList({debtors}) {
                                 />
                                 Restore
                             </button>
-                            <button onClick={(e) => handleDeletePermanent(d.id)} className='flex gap-2 w-full p-2 bg-(--quarternaryColor) text-white items-center justify-center rounded-md shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
+                            <button onClick={(e) => handleDeletePermanent(d.id)} className='flex gap-2 w-full p-2 bg-(--quarternaryColor) text-white items-center justify-center rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                                 <Image
                                 src='/Icons/trashIconSW.svg'
                                 alt="restoreIcon"
