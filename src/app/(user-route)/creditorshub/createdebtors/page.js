@@ -1,10 +1,11 @@
 'use client'
 
-
+export const dynamic = 'force-dynamic'
 import React, { useState } from 'react'
 
 import Link from 'next/link';
 import { createClient } from '@/src/app/lib/client';
+
 
 export default function CreateDebtors() {
 
