@@ -1,5 +1,5 @@
 
-import { BottomNav, Sidebar } from "@/src/app/components/SwitchingNavbar";
+import { BottomNav, Sidebar } from '@/src/app/components/SwitchingNavbar';
 
 
 export default function UserLayout({ children }) {

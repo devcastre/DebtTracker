@@ -1,10 +1,10 @@
 'use client'
 
 
-import { usePathname } from "next/navigation"
-import { navLinks } from "@/src/app/config/navlinks";
-import Link from "next/link";
-import Image from "next/image";
+import { usePathname } from 'next/navigation'
+import { navLinks } from '@/src/app/config/navlinks';
+import Link from 'next/link';
+import Image from 'next/image';
 
 
 
@@ -14,12 +14,12 @@ export function NavItems({ mobile = false }) {
   const pathname = usePathname();
 
   return (
-    <div className="w-full h-full">
+    <div className='w-full h-full'>
       <ul       
       className={
         mobile
-          ? "flex w-full justify-around px-2"
-          : "flex flex-col gap-5 py-4"
+          ? 'flex w-full justify-around px-2'
+          : 'flex flex-col gap-5 py-4'
       }
       >
         {navLinks.map((link) => {
@@ -39,16 +39,16 @@ export function NavItems({ mobile = false }) {
                   transition ease-in-out
                   text-sm font-semibold uppercase
                   ${mobile
-                    ? "flex-1 justify-center mb-4"
-                    : "w-full"}
+                    ? 'flex-1 justify-center mb-4'
+                    : 'w-full'}
                   ${
                     isActive
                       ? mobile
 
-                        ? "text-(--primaryColor) bg-(--background) rounded-b-md"
+                        ? 'text-(--primaryColor) bg-(--background) rounded-b-md'
 
-                        : "text-(--primaryColor) bg-white rounded-sm"
-                      : "text-white hover:text-white hover:bg-white/20"
+                        : 'text-(--primaryColor) bg-white rounded-sm'
+                      : 'text-white hover:text-white hover:bg-white/20'
               }`}
               >
                 <Image
@@ -57,7 +57,7 @@ export function NavItems({ mobile = false }) {
                   width={30}
                   height={30}
                 />
-                {mobile ? isActive ? (<span className="text-xs mt-1">{link.label}</span>) : ('') : (<span className="text-xs mt-1">{link.label}</span>)}
+                {mobile ? isActive ? (<span className='text-xs mt-1'>{link.label}</span>) : ('') : (<span className='text-xs mt-1'>{link.label}</span>)}
               </Link>
 
             </li>);

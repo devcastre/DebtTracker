@@ -94,7 +94,7 @@ export default function TrashList({debtors}) {
                             <button onClick={(e) => handleRestore(d.id)} className='flex gap-2 w-full p-2 bg-(--secondaryColor) text-white items-center justify-center rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                                 <Image
                                 src='/Icons/restoreIconW.svg'
-                                alt="restoreIcon"
+                                alt='restoreIcon'
                                 width={30}
                                 height={30}
                                 />
@@ -103,7 +103,7 @@ export default function TrashList({debtors}) {
                             <button onClick={(e) => handleDeletePermanent(d.id)} className='flex gap-2 w-full p-2 bg-(--quarternaryColor) text-white items-center justify-center rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                                 <Image
                                 src='/Icons/trashIconSW.svg'
-                                alt="restoreIcon"
+                                alt='restoreIcon'
                                 width={30}
                                 height={30}
                                 />                            

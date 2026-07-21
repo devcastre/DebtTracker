@@ -13,22 +13,22 @@ export function exportDebtorsToExcel(debtors) {
 
   const worksheet = XLSX.utils.json_to_sheet(exportData)
   const workbook = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Active Debtors")
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Active Debtors')
 
   const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
-  const blob = new Blob([excelBuffer], { type: "application/octet-stream" })
-  saveAs(blob, "ActiveDebtors.xlsx")
+  const blob = new Blob([excelBuffer], { type: 'application/octet-stream' })
+  saveAs(blob, 'ActiveDebtors.xlsx')
 }
 
 export function exportDebtorDetails(debtor, balance) {
   if (!debtor) return
 
   const ws = XLSX.utils.aoa_to_sheet([
-    ["Name", debtor.name],
-    ["Contact", debtor.contact],
-    ["Balance", balance],
+    ['Name', debtor.name],
+    ['Contact', debtor.contact],
+    ['Balance', balance],
     [],
-    ["Date", "Amount", "Type"],
+    ['Date', 'Amount', 'Type'],
     ...debtor.transactions.map(t => [
       t.date,
       t.amount,
@@ -37,9 +37,9 @@ export function exportDebtorDetails(debtor, balance) {
   ])
 
   const workbook = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(workbook, ws, "Debtor Details")
+  XLSX.utils.book_append_sheet(workbook, ws, 'Debtor Details')
 
   const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
-  const blob = new Blob([excelBuffer], { type: "application/octet-stream" })
-  saveAs(blob, "DebtorInfo.xlsx")
+  const blob = new Blob([excelBuffer], { type: 'application/octet-stream' })
+  saveAs(blob, 'DebtorInfo.xlsx')
 }

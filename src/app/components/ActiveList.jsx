@@ -116,7 +116,7 @@ export default function ActiveList({debtors}) {
                         <button onClick={() => handleTrash(d.id, d.balance)} className='flex gap-2 w-full p-2 bg-(--quarternaryColor) text-white items-center justify-center rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
                             <Image
                             src='/Icons/trashIconW.svg'
-                            alt="restoreIcon"
+                            alt='restoreIcon'
                             width={30}
                             height={30}
                             />                           

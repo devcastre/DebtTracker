@@ -1,6 +1,6 @@
 'use client'
 
-import { createClient } from "@/src/app/lib/client";
+import { createClient } from '@/src/app/lib/client';
 
 export default function useRestoreDebtor() {
 
@@ -12,7 +12,7 @@ export default function useRestoreDebtor() {
         const {data, error} = await supabase
             .from('debtors')
             .update({status: 'active'})
-            .eq("user_id", user.id)
+            .eq('user_id', user.id)
             .eq('id', id)
 
         if(error) throw error  

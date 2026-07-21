@@ -1,6 +1,6 @@
 'use client'
 
-import { createClient} from "@/src/app/lib/client";
+import { createClient} from '@/src/app/lib/client';
 
 export default function useTrashDebtor() {
 
@@ -38,7 +38,7 @@ export default function useTrashDebtor() {
             const {data, error} = await supabase
                 .from('debtors')
                 .update({status: 'trash'})
-                .eq("user_id", user.id)
+                .eq('user_id', user.id)
                 .eq('id', id)
 
             if(error) throw error  
@@ -46,7 +46,7 @@ export default function useTrashDebtor() {
             return data;
 
         } catch (error) {
-            console.error("Error trashing debtor:", error);
+            console.error('Error trashing debtor:', error);
             throw error;            
         }
     }

@@ -63,56 +63,56 @@ export default function LogIn() {
 
 
   return (
-    <div className="p-6 w-full max-w-md mx-auto bg-white shadow-lg rounded-sm mt-20">
-      <h2 className="text-3xl text-(--primaryColor) font-bold mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
+    <div className='p-6 w-full max-w-md mx-auto bg-white shadow-lg rounded-sm mt-20'>
+      <h2 className='text-3xl text-(--primaryColor) font-bold mb-6'>{isLogin ? 'Login' : 'Sign Up'}</h2>
 
-      {errorMsg && <p className="text-red-500 mb-4 text-center">{errorMsg}</p>}
+      {errorMsg && <p className='text-red-500 mb-4 text-center'>{errorMsg}</p>}
 
-      <form className="flex flex-col gap-5" onSubmit={isLogin ? handleLogin : handleSignup}>
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2">
-          <label htmlFor="email" className="mb-1 text-base font-medium text-gray-700">
+      <form className='flex flex-col gap-5' onSubmit={isLogin ? handleLogin : handleSignup}>
+        <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+          <label htmlFor='email' className='mb-1 text-base font-medium text-gray-700'>
             Email:
           </label>
           <input
-            type="email"
-            id="email"
+            type='email'
+            id='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
+            placeholder='you@example.com'
             required
-            className="w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]"
+            className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2">
-          <label htmlFor="password" className="mb-1 text-base font-medium text-gray-700">
+        <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+          <label htmlFor='password' className='mb-1 text-base font-medium text-gray-700'>
             Password:
           </label>
           <input
-            type="password"
-            id="password"
+            type='password'
+            id='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
+            placeholder='••••••••'
             required
-            className="w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]"
+            className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
           />
         </div>
 
         <button
-          type="submit"
+          type='submit'
           disabled={loading}
-          className="w-full bg-(--primaryColor) text-white py-3 rounded-sm hover:bg-(--secondaryColor) transition-colors duration-200 shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]"
+          className='w-full bg-(--primaryColor) text-white py-3 rounded-sm hover:bg-(--secondaryColor) transition-colors duration-200 shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
         >
           {loading ? 'Please wait...' : isLogin ? 'Login' : 'Sign Up'}
         </button>
 
-        <p className="text-center text-gray-600 mt-2">
-          {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
+        <p className='text-center text-gray-600 mt-2'>
+          {isLogin ? 'Don't have an account?' : 'Already have an account?'}{' '}
           <button
-            type="button"
+            type='button'
             onClick={() => setIsLogin(!isLogin)}
-            className="text-(--primaryColor) hover:underline"
+            className='text-(--primaryColor) hover:underline'
           >
             {isLogin ? 'Sign Up' : 'Login'}
           </button>

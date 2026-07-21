@@ -5,9 +5,9 @@ export function groupByMonth(transactions) {
 
   transactions.forEach(item => {
     const date = new Date(item.date);
-    const key = date.toLocaleString("en-US", {
-      month: "short",
-      year: "numeric",
+    const key = date.toLocaleString('en-US', {
+      month: 'short',
+      year: 'numeric',
     });
 
     if (!result[key]) {

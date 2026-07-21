@@ -63,7 +63,7 @@ export default async function DebtorsProfilePage({params}) {
         <Link href={`/creditorshub/debtors/${debtor.id}/newtransaction`} className='bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'>
           <Image
             src='/Icons/addIconW.svg'
-            alt="addIcon"
+            alt='addIcon'
             width={30}
             height={30}
           />
