@@ -1,9 +1,9 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import ListControls from '@/src/app/components/ListControls'
-import useRestoreDebtor from '@/src/app/hooks/restoreDebtor';
-import usePermaDeleteDebtor from '@/src/app/hooks/permaDeleteDebtor';
+import ListControls from '@/src/components/ListControls'
+import useRestoreDebtor from '@/src/hooks/restoreDebtor';
+import usePermaDeleteDebtor from '@/src/hooks/permaDeleteDebtor';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 

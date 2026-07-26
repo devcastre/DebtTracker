@@ -1,8 +1,8 @@
 
 
-import RangeCircle from '@/src/app/components/RangeCircle';
-import TransactionsChart from '@/src/app/components/TransactionsChart';
-import { getDashboardData } from '../../lib/getDashboardData';
+import RangeCircle from '@/src/components/RangeCircle';
+import TransactionsChart from '@/src/components/TransactionsChart';
+import { getDashboardData } from '../../../lib/getDashboardData';
 
 export default async function Dashboard() {
 

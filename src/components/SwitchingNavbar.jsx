@@ -1,7 +1,7 @@
 'use client'
 
-import { NavItems } from '@/src/app/components/NavItems';
-import LogoutButton from '@/src/app/components/LogOut';
+import { NavItems } from '@/src/components/NavItems';
+import LogoutButton from '@/src/components/LogOut';
 
 export function Sidebar() {
   

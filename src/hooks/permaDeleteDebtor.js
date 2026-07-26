@@ -1,6 +1,6 @@
 'use client'
 
-import { createClient } from '@/src/app/lib/client';
+import { createClient } from '@/src/lib/client';
 
 export default function usePermaDeleteDebtor() {
 

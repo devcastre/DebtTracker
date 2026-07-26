@@ -1,6 +1,6 @@
 
 
-import { updateSession } from '@/src/app/lib/proxy'
+import { updateSession } from '@/src/lib/proxy'
 
 
 export async function proxy(request) {

@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from '@/src/app/lib/server'
+import { createClient } from '@/src/lib/server'
 import { revalidatePath } from 'next/cache'
 
 export async function addNewTransaction(formData) {

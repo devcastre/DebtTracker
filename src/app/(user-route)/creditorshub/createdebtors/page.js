@@ -1,5 +1,5 @@
-import NewDebtorForm from '@/src/app/components/NewDebtorForm'
-import { addNewDebtor } from '@/src/app/utils/addNewDebtor'
+import NewDebtorForm from '@/src/components/NewDebtorForm'
+import { addNewDebtor } from '@/src/utils/addNewDebtor'
 
 export default async function newDebtorPage() {
 

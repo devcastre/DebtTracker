@@ -1,7 +1,7 @@
 'use client'
 
 
-import { calcRangeCircle } from '@/src/app/utils/calcRangeCircle'
+import { calcRangeCircle } from '@/src/utils/calcRangeCircle'
 
 export default function RangeCircle({ totals }) {
 

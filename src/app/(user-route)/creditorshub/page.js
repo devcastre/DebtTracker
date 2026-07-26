@@ -1,10 +1,10 @@
 
 
-import ActiveList from '@/src/app/components/ActiveList'
+import ActiveList from '@/src/components/ActiveList'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getActiveDebtors } from '@/src/app/lib/getActiveDebtors'
-import ExportActiveButton from '@/src/app/components/ExportActiveButton';
+import { getActiveDebtors } from '@/src/lib/getActiveDebtors'
+import ExportActiveButton from '@/src/components/ExportActiveButton';
 
 export default async function CreditorsHub() {
 

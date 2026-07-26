@@ -1,7 +1,7 @@
 
 
-import ExportDebtorDetailBtn from '@/src/app/components/ExportDebtorDetailBtn';
-import { getDebtorById } from '@/src/app/lib/getDebtorById';
+import ExportDebtorDetailBtn from '@/src/components/ExportDebtorDetailBtn';
+import { getDebtorById } from '@/src/lib/getDebtorById';
 import Image from 'next/image';
 import Link from 'next/link';
 

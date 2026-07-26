@@ -1,7 +1,7 @@
 'use client'
 
 
-import LogIn from '@/src/app/components/LogIn'
+import LogIn from '@/src/components/LogIn'
 
 export default function LandingPage() {
   return (

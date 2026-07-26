@@ -1,4 +1,4 @@
-import { createClient } from '@/src/app/lib/server'
+import { createClient } from '@/src/lib/server'
 
 
 export async function getDashboardData(){

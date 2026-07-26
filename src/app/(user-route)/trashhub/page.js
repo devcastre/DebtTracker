@@ -1,7 +1,7 @@
 
 
-import TrashList from '@/src/app/components/TrashList';
-import { getTrashedDebtors } from '@/src/app/lib/getTrashedDebtors';
+import TrashList from '@/src/components/TrashList';
+import { getTrashedDebtors } from '@/src/lib/getTrashedDebtors';
 
 
 export default async function TrashHub() {

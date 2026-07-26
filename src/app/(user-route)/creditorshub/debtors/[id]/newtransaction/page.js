@@ -1,6 +1,6 @@
 
-import NewTransactionForm from '@/src/app/components/NewTransactionForm';
-import { addNewTransaction } from '@/src/app/utils/addNewTransaction';
+import NewTransactionForm from '@/src/components/NewTransactionForm';
+import { addNewTransaction } from '@/src/utils/addNewTransaction';
 
 
 export default async function newtransactionPage({ params }) {

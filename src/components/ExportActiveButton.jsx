@@ -2,7 +2,7 @@
 'use client'
 
 
-import { exportDebtorsToExcel } from '@/src/app/services/excelExport'
+import { exportDebtorsToExcel } from '@/src/services/excelExport'
 import Image from 'next/image'
 
 export default function ExportActiveButton({ debtors }) {

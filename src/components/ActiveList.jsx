@@ -1,11 +1,11 @@
 'use client'
 
 
-import ListControls from '@/src/app/components/ListControls';
+import ListControls from '@/src/components/ListControls';
 import Link from 'next/link';
 import Image from 'next/image';
-import useTrashDebtor from '@/src/app/hooks/trashDebtor';
-import Modal from '@/src/app/components/Modal';
+import useTrashDebtor from '@/src/hooks/trashDebtor';
+import Modal from '@/src/components/Modal';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 

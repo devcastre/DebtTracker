@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient} from '@/src/app/lib/client';
+import { createClient} from '@/src/lib/client';
 
 
 export default function LogIn() {
