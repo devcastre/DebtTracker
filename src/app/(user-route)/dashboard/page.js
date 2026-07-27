@@ -10,7 +10,7 @@ export default async function Dashboard() {
   const {totalsData, allTransactions, debtorsStatistics} = await getDashboardData();
 
   return (
-    <main className='px-6 pt-10 pb-32 md:pb-10 md:px-8 lg:px-12 w-full flex flex-col gap-12 md:gap-8'>
+    <main className='px-6 pt-6 pb-32 md:p-6 w-full flex flex-col gap-12 md:gap-6'>
       <h1 className='text-(--primaryColor) mb-0 text-3xl sm:text-4xl w-full text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>Dashboard</h1>
       <div className='grid grid-cols-1 lg:grid-cols-[2fr_3fr] items-center gap-6 justify-center lg:justify-between'>
         <RangeCircle totals={totalsData}/>

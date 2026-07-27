@@ -13,7 +13,7 @@ export default async function CreditorsHub() {
   
 
   return (
-    <main className='px-6 pt-12 pb-32 md:px-8 lg:px-12 lg:pb-6 w-full flex flex-col'>
+    <main className='px-6 pt-6 pb-32 md:p-6 w-full flex flex-col'>
       <div className='flex flex-col gap-12'>
         <div className='flex flex-wrap items-center md:items-start gap-6 justify-center lg:justify-between'>
           <h1 className='text-(--primaryColor) mb-0 text-3xl sm:text-4xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>CreditorsHub</h1>

@@ -7,10 +7,11 @@ export function Sidebar() {
   
     return (
 
-        <aside className='[background:var(--primary-gradient)] text-white hidden md:flex md:w-72 flex-col gap-12 py-12 px-5 md:px-3'>
-            <span>
-                <h3 className='text-white text-3xl italic'>Debt Tracker</h3>
-            </span>
+        <aside className='[background:var(--primary-gradient)] h-dvh text-white hidden md:flex md:w-72 flex-col gap-12 pt-6 pb-4 px-5 md:px-3'>
+            <div className='flex flex-col gap-2'>
+                <h3 className='text-white text-3xl'>Debt Tracker</h3>
+                <hr />
+            </div>
             <NavItems />
             <LogoutButton />
         </aside>
