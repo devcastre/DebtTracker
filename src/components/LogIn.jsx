@@ -108,7 +108,7 @@ export default function LogIn() {
         </button>
 
         <p className='text-center text-gray-600 mt-2'>
-          {isLogin ? 'Don't have an account?' : 'Already have an account?'}{' '}
+          {isLogin ? 'Don`t have an account?' : 'Already have an account?'}{' '}
           <button
             type='button'
             onClick={() => setIsLogin(!isLogin)}

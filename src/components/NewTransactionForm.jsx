@@ -2,7 +2,7 @@
 
 
 import Link from 'next/link';
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export default function NewTransactionForm({ action, debtorId }) {
 
@@ -10,11 +10,23 @@ export default function NewTransactionForm({ action, debtorId }) {
   const [amount, setAmount] = useState('');       
   const [date, setDate] = useState('');           
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const submittingRef = useRef(false);
 
   async function handleSubmit(formData) {
-    await action(formData)
-    setSuccess(true)
+      if (submittingRef.current) return;
+      submittingRef.current = true;
+
+      setLoading(true);
+
+      try {
+          await action(formData)
+          setSuccess(true)
+      } finally {
+          setLoading(false);
+      }
   }
+
 
   return (
     <main className='px-6 pt-6 pb-32 md:pb-6 flex w-full h-dvh items-center justify-center'>
@@ -71,8 +83,9 @@ export default function NewTransactionForm({ action, debtorId }) {
           <button
             type='submit'
             className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
+            disabled={loading}
           >
-            Add Transaction
+            {loading ? "Saving..." : "Add Transaction"}
           </button>
 
           {success && (

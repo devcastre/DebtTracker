@@ -4,6 +4,13 @@ import { createClient } from '@/src/lib/server'
 import { revalidatePath } from 'next/cache'
 
 export async function addNewTransaction(formData) {
+
+  const amount = Number(formData.get('amount'))
+
+  if (!amount || amount <= 0) {
+      throw new Error('Invalid amount');
+  }
+
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Unauthorized')
@@ -25,7 +32,7 @@ export async function addNewTransaction(formData) {
       user_id: user.id,
       debtor_id: debtorId,
       type: formData.get('type'),
-      amount: Number(formData.get('amount')),
+      amount,
       interest_rate: 5,
       date: formData.get('date')
   }])
