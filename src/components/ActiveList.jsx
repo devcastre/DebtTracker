@@ -93,7 +93,7 @@ export default function ActiveList({debtors}) {
   return (
     <div className='flex flex-col bg-white rounded-sm p-6 gap-12'>
         <div className='flex flex-col gap-6 items-center md:items-start'>
-            <h3 className='text-(--primaryColor) font-medium md:whitespace-nowrap'>List of Active Debtors</h3>
+            <h4 className='text-(--primaryColor) font-medium md:whitespace-nowrap'>List of Active Debtors</h4>
             <ListControls
                 search={search}
                 setSearch={setSearch}
@@ -110,7 +110,7 @@ export default function ActiveList({debtors}) {
                 {processeddata.map(d => (
                     <li key={d.id} className='grid grid-cols-1 lg:grid-cols-[4fr_1fr] gap-2 lg:gap-6'>
                         <Link href={`/creditorshub/debtors/${d.id}`} className='flex flex-row items-center justify-between p-2 bg-(--primaryColor) text-white rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>
-                            <span className='px-2'>{d.name}</span>
+                            <span className='px-1'>{d.name}</span>
                             <div className='px-4 py-1 w-36 rounded-sm bg-white text-black shadow-[inset_4px_4px_4px_0_rgba(0,0,0,0.75)]'>₱ {d.balance}</div>
                         </Link> 
                         <button onClick={() => handleTrash(d.id, d.balance)} className='flex gap-2 w-full p-2 bg-(--quarternaryColor) text-white items-center justify-center rounded-sm shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75),-4px_-4px_4px_0px_rgba(255,255,255,0.75)]'>

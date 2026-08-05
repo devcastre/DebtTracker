@@ -2,6 +2,7 @@
 
 import ExportDebtorDetailBtn from '@/src/components/ExportDebtorDetailBtn';
 import { getDebtorById } from '@/src/lib/getDebtorById';
+import { formatDate } from '@/src/utils/formatDate';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -35,7 +36,7 @@ export default async function DebtorsProfilePage({params}) {
               {recentDebt.map(rdebt => (
                 <li key={rdebt.id} className='grid grid-cols-2 place-items-center w-full'>
                   <span className='text-black'>₱{rdebt.amount}</span>
-                  <span className='text-black'>{rdebt.date}</span>
+                  <span className='text-black'>{formatDate(rdebt.date)}</span>
                 </li>
               ))}
             </ul>

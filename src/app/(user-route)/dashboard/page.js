@@ -20,14 +20,14 @@ export default async function Dashboard() {
         </div>
       </div>
       <div className='h-0.5 w-full bg-(--primaryColor)'></div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center md:justify-between'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start justify-center md:justify-between lg:min-h-60'>
         <div className='flex flex-col'>
           <h4 className='text-(--primaryColor)'>Largest Debt</h4>
           {debtorsStatistics.sortedLent.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (
-              <div className='p-1.5 h-full min-h-60 max-h-64 mt-auto rounded-sm shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]'>
-                <ul className='flex flex-col h-full bg-(--background) p-3 rounded-sm shadow-[2px_2px_2px_0px_rgba(0,0,0,0.5),-2px_-2px_2px_0px_rgba(255,255,255,0.75)] divide-y-2 divide-(--primaryColor)'>
+              <div className='p-1.5 h-fit mt-auto rounded-sm shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]'>
+                <ul className='flex flex-col h-fit bg-(--background) p-3 rounded-sm shadow-[2px_2px_2px_0px_rgba(0,0,0,0.5),-2px_-2px_2px_0px_rgba(255,255,255,0.75)] divide-y-2 divide-(--primaryColor)'>
                   {debtorsStatistics.sortedLent.map((obj, index) => (
                     <li key={obj.id} className='p-4 text-(--primaryColor) flex flex-row justify-between item-center gap-3'><span className='text-base h-fit font-medium'>{index + 1}. {obj.name}</span><span className='text-white bg-(--primaryColor) rounded-sm py-0.5 px-1.5 h-7 whitespace-nowrap'>₱ {obj.sumOfDebt}</span></li>
                   ))}
@@ -41,7 +41,7 @@ export default async function Dashboard() {
           {debtorsStatistics.sortedCollection.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (          
-              <div className='p-1.5 h-full min-h-60 max-h-64 mt-auto rounded-sm shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]'>
+              <div className='p-1.5 h-fit mt-auto rounded-sm shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]'>
                 <ul className='flex flex-col h-full bg-(--background) p-3 rounded-sm shadow-[2px_2px_2px_0px_rgba(0,0,0,0.5),-2px_-2px_2px_0px_rgba(255,255,255,0.75)] divide-y-2 divide-(--primaryColor)'>
                   {debtorsStatistics.sortedCollection.map((obj, index) => (
                     <li key={obj.id} className='p-4 text-(--primaryColor) flex flex-row justify-between item-center gap-3'><span className='text-base h-fit font-medium'>{index + 1}. {obj.name}</span><span className='text-white bg-(--primaryColor) rounded-sm py-0.5 px-1.5 h-7 whitespace-nowrap'>₱ {obj.sumOfPayment}</span></li>
@@ -55,7 +55,7 @@ export default async function Dashboard() {
           {debtorsStatistics.sortedDebtFreq.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
           ) : (
-              <div className='p-1.5 h-full min-h-60 max-h-64 mt-auto rounded-sm shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]'>
+              <div className='p-1.5 h-fit mt-auto rounded-sm shadow-[inset_2px_2px_2px_rgba(0,0,0,0.4),inset_-2px_-2px_2px_rgba(255,255,255)]'>
                 <ul className='flex flex-col h-full bg-(--background) p-3 rounded-sm shadow-[2px_2px_2px_0px_rgba(0,0,0,0.5),-2px_-2px_2px_0px_rgba(255,255,255,0.75)] divide-y-2 divide-(--primaryColor)'>
                   {debtorsStatistics.sortedDebtFreq.map((obj, index) => (
                     <li key={obj.id} className='p-4 text-(--primaryColor) flex flex-row justify-between item-center gap-3'><span className='text-base h-fit font-medium'>{index + 1}. {obj.name}</span><span className='text-white bg-(--primaryColor) rounded-sm py-0.5 px-1.5 h-7 whitespace-nowrap'>{obj.debtLength}x</span></li>
