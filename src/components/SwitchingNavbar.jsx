@@ -7,7 +7,7 @@ export function Sidebar() {
   
     return (
 
-        <aside className='[background:var(--primary-gradient)] h-dvh text-white hidden md:flex md:w-72 flex-col gap-12 pt-6 pb-4 px-5 md:px-3'>
+        <aside className='[background:var(--primary-gradient)] h-screen text-white hidden md:flex md:w-56 xl:w-72 flex-col gap-12 pt-6 pb-4 px-5 md:px-3'>
             <div className='flex flex-col gap-2'>
                 <h3 className='text-white text-3xl'>Debt Tracker</h3>
                 <hr />
