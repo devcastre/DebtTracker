@@ -52,7 +52,7 @@ export default async function DebtorsProfilePage({params}) {
               {recentPayment.map(rpay => (
                 <li key={rpay.id} className='grid grid-cols-2 place-items-center w-full'>
                   <span className='text-black'>₱{rpay.amount}</span>
-                  <span className='text-black'>{rpay.date}</span>
+                  <span className='text-black'>{formatDate(rpay.date)}</span>
                 </li>
               ))}
             </ul>
