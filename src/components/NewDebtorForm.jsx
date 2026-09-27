@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link';
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 
 export default function NewDebtorForm({action}){
@@ -10,11 +10,34 @@ export default function NewDebtorForm({action}){
     const [contact, setContact] = useState('');
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState('');
+
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const submittingRef = useRef(false);
 
     async function handleSubmit(formData) {
-        await action(formData)
-        setSuccess(true)
+        if (submittingRef.current) return;
+        submittingRef.current = true;
+
+        setError(null);
+        setLoading(true);
+
+        try {
+            await action(formData)
+            setSuccess(true)
+            setName('')
+            setContact('')
+            setAmount('')
+            setDate('')
+
+        } catch (err) {
+            setError(err.message || 'Something went wrong')
+        }
+        finally {
+            setLoading(false);
+            submittingRef.current = false;
+        }
     }
 
     return (
@@ -86,9 +109,13 @@ export default function NewDebtorForm({action}){
 
                 </div>                                                
 
-                <button type='submit' className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'>
-                    Add Debtor
+                <button type='submit' className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]' disabled={loading}>
+                    {loading ? "Saving..." : "Add Debtor"}
                 </button>
+
+                {error && (
+                    <p className='text-red-500'>⚠️ {error}</p>
+                )}
 
                 {success && (
                     <div className='flex flex-col gap-6'>

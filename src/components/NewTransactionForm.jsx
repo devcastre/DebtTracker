@@ -8,8 +8,10 @@ export default function NewTransactionForm({ action, debtorId }) {
 
   const [type, setType] = useState('debt');      
   const [amount, setAmount] = useState('');       
-  const [date, setDate] = useState('');           
+  const [date, setDate] = useState('');
+
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const submittingRef = useRef(false);
 
@@ -17,13 +19,21 @@ export default function NewTransactionForm({ action, debtorId }) {
       if (submittingRef.current) return;
       submittingRef.current = true;
 
+      setError(null);
       setLoading(true);
 
       try {
           await action(formData)
           setSuccess(true)
-      } finally {
+          setAmount('')
+          setDate('')          
+      }
+      catch (err) {
+          setError(err.message || 'Something went wrong')
+      }
+      finally {
           setLoading(false);
+          submittingRef.current = false;
       }
   }
 
@@ -87,6 +97,10 @@ export default function NewTransactionForm({ action, debtorId }) {
           >
             {loading ? "Saving..." : "Add Transaction"}
           </button>
+
+          {error && (
+              <p className='text-red-500'>⚠️ {error}</p>
+          )}
 
           {success && (
             <div className='flex flex-col gap-6'>
