@@ -2,7 +2,7 @@
 
 import ExportDebtorDetailBtn from '@/src/components/ExportDebtorDetailBtn';
 import { getDebtorById } from '@/src/lib/getDebtorById';
-import { formatDate } from '@/src/utils/formatDate';
+import { formatDate } from '@/src/utils/dateFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,7 +21,7 @@ export default async function DebtorsProfilePage({params}) {
           <span className='text-black'>{debtor.contact}</span>          
         </div>
         <div className='flex flex-col xs:items-end'>
-          <h2 className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{balance}</h2>
+          <h2 className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{+Number(balance).toFixed(2)}</h2>
           <span className='text-black'>Balance</span> 
         </div>  
       </div>
