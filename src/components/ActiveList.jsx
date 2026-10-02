@@ -133,7 +133,7 @@ export default function ActiveList({debtors}) {
 
 
   return (
-    <div className='flex flex-col bg-white rounded-sm p-6 gap-12'>
+    <div className='flex flex-col bg-white rounded-sm p-6 gap-12 min-h-[70vh]'>
         <div className='flex flex-col gap-6 items-center md:items-start'>
             <h4 className='text-(--primaryColor) font-medium md:whitespace-nowrap'>List of Active Debtors</h4>
             <ListControls

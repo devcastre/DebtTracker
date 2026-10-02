@@ -41,7 +41,12 @@ export default function NewDebtorForm({action}){
     }
 
     return (
-    <main className='px-6 pt-6 pb-32 md:pb-6 flex w-full h-dvh items-center justify-center'>
+    <main className='relative px-6 pt-6 pb-32 md:pb-6 flex flex-col w-full h-dvh items-center justify-center'>
+        <button className='absolute left-6 top-5 z-10'>
+            <Link href={`/creditorshub`} className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-5xl'>
+            ←
+            </Link>
+        </button>
         <div className='p-6 w-full max-w-md bg-white shadow-lg rounded-sm'>
             <form action={handleSubmit} className='flex flex-col gap-5'>
 

@@ -15,19 +15,24 @@ export default async function DebtorsProfilePage({params}) {
 
   return (
     <main className='px-6 pt-6 pb-32 md:p-12 w-full flex flex-col gap-5'>       
-      <div className='flex flex-col xs:flex-row xs:justify-between xs:gap-0 gap-8'>
-        <div className='flex flex-col'>
-          <h1 className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>{debtor.name}</h1>
+      <div className='grid grid-cols-2 lg:grid-cols-3 xs:justify-between xs:gap-0 gap-5'>
+        <button className='col-span-2 lg:col-span-1 justify-self-start flex items-start'>
+          <Link href={`/creditorshub`} className='text-(--primaryColor) drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-4xl'>
+            ←
+          </Link>
+        </button>
+        <div className='flex flex-col items-start lg:items-center w-full'>
+          <h1 className='text-center text-xl xs:text-4xl text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>{debtor.name}</h1>
           <span className='text-black'>{debtor.contact}</span>          
         </div>
-        <div className='flex flex-col xs:items-end'>
-          <h2 className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{+Number(balance).toFixed(2)}</h2>
+        <div className='flex flex-col items-end'>
+          <h2 className='text-2xl xs:text-4xl text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{+Number(balance).toFixed(2)}</h2>
           <span className='text-black'>Balance</span> 
         </div>  
       </div>
 
       <div className='flex flex-col bg-white rounded-sm p-6 gap-12'>
-        <div className='flex flex-col gap-3 w-full'>
+        <div className='flex flex-col gap-3 w-full min-h-44'>
           <h4 className='text-(--primaryColor) text-center border-3 border-(--primaryColor)/50 p-1 rounded-sm'>Recent Debt:</h4>
           {recentDebt.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
@@ -43,7 +48,7 @@ export default async function DebtorsProfilePage({params}) {
           )}
         </div>
 
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3 w-full min-h-44'>
           <h4 className='text-(--primaryColor) text-center border-3 border-(--primaryColor)/50 p-1 rounded-sm'>Recent Payment:</h4>
           {recentPayment.length === 0 ? (
               <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
