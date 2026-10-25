@@ -93,22 +93,25 @@ export default function ActiveList({debtors}) {
 
     const { trashDebtor } = useTrashDebtor();
 
-    const handleTrash = async (id, balance, user_id) => {
-        
-        if(balance > 0){
-            setConfirmAction(() => async () => {
-                await trashDebtor(id, balance, user_id);
-                router.refresh();     
-                closeModal();          
-            })
+    const handleTrash = async (id, balance) => {
+        const doTrash = async () => {
+            try {
+                await trashDebtor(id, balance);
+                router.refresh();
+            } catch (e) {
+                alert('Failed to trash debtor. Please try again.');
+            } finally {
+                closeModal();
+            }
+        };
 
+        if (balance > 0) {
+            setConfirmAction(() => doTrash);
             setOpenModal(true);
+        } else {
+            await doTrash();
         }
-        else{
-            await trashDebtor(id, 0);
-            router.refresh();
-        }
-    };    
+    };   
 
 
     if(!processeddata) return <div>No Debtors Exist</div>
