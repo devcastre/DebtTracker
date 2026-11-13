@@ -3,6 +3,7 @@
 import ExportDebtorDetailBtn from '@/src/components/ExportDebtorDetailBtn';
 import { getDebtorById } from '@/src/lib/getDebtorById';
 import { formatDate } from '@/src/utils/dateFunctions';
+import { formatPhoneNumber, toInternationalPhone } from '@/src/utils/phoneFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -23,7 +24,7 @@ export default async function DebtorsProfilePage({params}) {
         </button>
         <div className='flex flex-col items-start lg:items-center w-full'>
           <h1 className='text-center text-xl xs:text-4xl text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>{debtor.name}</h1>
-          <span className='text-black'>{debtor.contact}</span>          
+          <span className='text-black'>{formatPhoneNumber(debtor.contact)}</span>          
         </div>
         <div className='flex flex-col items-end'>
           <h2 className='text-2xl xs:text-4xl text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{+Number(balance).toFixed(2)}</h2>
@@ -64,17 +65,58 @@ export default async function DebtorsProfilePage({params}) {
           )}
         </div>        
       </div>
-      <div className='flex flex-col md:flex-row gap-5 md:gap-12'>
-        <ExportDebtorDetailBtn debtor={debtor} balance={balance}/>
-        <Link href={`/creditorshub/debtors/${debtor.id}/newtransaction`} className='bg-(--primaryColor) text-xl py-3 w-full rounded text-white flex gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'>
+      <div className='grid grid-cols-2 md:grid-cols-3 gap-5'>
+
+        {/* Call */}
+        <Link
+          href={`tel:${toInternationalPhone(debtor.contact)}`}
+          className='md:hidden bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
+        >
+          <Image
+            src='/Icons/callIconB.svg'
+            alt='Call'
+            width={25}
+            height={25}
+            className='brightness-0 invert'
+          />
+          Call
+        </Link>
+
+        {/* WhatsApp */}
+        <Link
+          href={`https://wa.me/${toInternationalPhone(debtor.contact)}`}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
+        >
+          <Image
+            src='/Icons/whatsappIconb.svg'
+            alt='addIcon'
+            width={30}
+            height={30}
+            className='brightness-0 invert'
+          />
+          WhatsApp
+        </Link>
+
+        <ExportDebtorDetailBtn
+          debtor={debtor}
+          balance={balance}
+        />
+
+        <Link
+          href={`/creditorshub/debtors/${debtor.id}/newtransaction`}
+          className='bg-(--primaryColor) text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
+        >
           <Image
             src='/Icons/addIconW.svg'
             alt='addIcon'
             width={30}
             height={30}
           />
-            Add Transaction
+          Add Transaction
         </Link>
+
       </div>
 
 

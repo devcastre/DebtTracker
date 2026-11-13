@@ -27,12 +27,9 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang='en'>
-      <body
-        className={`${poppins.variable} ${lato.variable} antialiased min-h-screen flex flex-col md:flex-row`}
-      >
+      <body className={`${poppins.variable} ${lato.variable} antialiased min-h-screen flex flex-col md:flex-row`}>
 
           {children}
-
 
       </body>
     </html>
