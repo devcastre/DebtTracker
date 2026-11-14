@@ -10,9 +10,6 @@
   
   --primary-gradient: linear-gradient(135deg, #0D776F 40%, #12AA9F 60%);
 
-
-
-
 }
 
 
@@ -48,3 +45,4 @@ h1, h2, h3, h4, h5, h6{
   --breakpoint-xs: 430px;
   --breakpoint-2xs: 600px;
 }
+

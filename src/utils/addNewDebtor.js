@@ -41,6 +41,5 @@ export async function addNewDebtor(formData) {
 
   }
 
-
   revalidatePath(`/creditorshub`)
 }

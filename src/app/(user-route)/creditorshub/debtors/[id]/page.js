@@ -3,7 +3,7 @@
 import ExportDebtorDetailBtn from '@/src/components/ExportDebtorDetailBtn';
 import { getDebtorById } from '@/src/lib/getDebtorById';
 import { formatDate } from '@/src/utils/dateFunctions';
-import { formatPhoneNumber, toInternationalPhone } from '@/src/utils/phoneFunctions';
+import { formatPhoneNumber, toWhatsAppPhone } from '@/src/utils/phoneFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -69,7 +69,7 @@ export default async function DebtorsProfilePage({params}) {
 
         {/* Call */}
         <Link
-          href={`tel:${toInternationalPhone(debtor.contact)}`}
+          href={`tel:${toWhatsAppPhone(debtor.contact)}`}
           className='md:hidden bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
         >
           <Image
@@ -84,7 +84,7 @@ export default async function DebtorsProfilePage({params}) {
 
         {/* WhatsApp */}
         <Link
-          href={`https://wa.me/${toInternationalPhone(debtor.contact)}`}
+          href={`https://wa.me/${toWhatsAppPhone(debtor.contact)}`}
           target='_blank'
           rel='noopener noreferrer'
           className='bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'

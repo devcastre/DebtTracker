@@ -1,6 +1,7 @@
 
 
 import { Lato, Poppins } from 'next/font/google';
+import 'react-international-phone/style.css';
 import '@/src/app/globals.css';
 
 

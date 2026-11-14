@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRef, useState } from 'react'
+import { PhoneInput } from 'react-international-phone';
 
 
 export default function NewDebtorForm({action}){
@@ -39,7 +40,6 @@ export default function NewDebtorForm({action}){
             submittingRef.current = false;
         }
     }
-
     return (
     <main className='relative px-6 pt-6 pb-32 md:pb-6 flex flex-col w-full h-dvh items-center justify-center'>
         <button className='absolute left-6 top-5 z-10'>
@@ -69,15 +69,22 @@ export default function NewDebtorForm({action}){
                     <label htmlFor='contact' className='mb-3 block text-base font-medium text-(--primaryColor)'>
                         Contact:
                     </label>                
-                    <input
-                        type='number'
-                        name='contact'
-                        id='contact'
+                    <PhoneInput
+                        defaultCountry="ph"
                         value={contact}
-                        onChange={e => setContact(e.target.value)}
-                        placeholder='0912-345-6789'
-                        required
-                        className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+                        onChange={(phone) => setContact(phone)}
+                        forceDialCode={true}
+                        inputProps={{
+                            id: 'contact',  
+                            name: 'contact',
+                            required: true,
+                            placeholder: '9171234567',
+                        }}
+                        className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] p-3 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+                        inputClassName="!bg-(--background)"
+                        countrySelectorStyleProps={{
+                            buttonClassName: "!bg-(--background)",
+                        }}
                     />
 
                 </div>

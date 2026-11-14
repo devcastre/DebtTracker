@@ -12,6 +12,6 @@ export function formatPhoneNumber(phone) {
   return `0${number}`;
 }
 
-export function toInternationalPhone(phone) {
-  return `63${String(phone).replace(/\D/g, '').replace(/^0/, '')}`;
+export function toWhatsAppPhone(phone) {
+  return String(phone).replace(/\D/g, '');
 }
