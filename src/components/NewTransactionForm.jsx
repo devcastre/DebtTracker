@@ -39,88 +39,91 @@ export default function NewTransactionForm({ action, debtorId }) {
 
 
   return (
-    <main className='relative px-6 pt-6 pb-32 md:pb-6 flex w-full h-dvh items-center justify-center'>
-      <button className='absolute left-6 top-5 z-10'>
+    <main className='flex flex-col px-6 pt-6 pb-32 md:pb-6 w-full h-dvh items-center justify-start'>
+      <button className='self-start'>
           <Link href={`/creditorshub/debtors/${debtorId}`} className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-5xl'>
           ←
           </Link>
       </button>
-      <div className='p-6 w-full max-w-md bg-white shadow-lg rounded-sm'>
-        <form action={handleSubmit} className='flex flex-col gap-5'>
+      <div className='w-full h-full flex'>
+        <div className='p-6 w-full h-fit max-w-md bg-white shadow-lg rounded-sm m-auto'>
+          <form action={handleSubmit} className='flex flex-col gap-5'>
 
-          <input type='hidden' name='debtor_id' value={debtorId} />
+            <input type='hidden' name='debtor_id' value={debtorId} />
 
-          <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
-            <label className='mb-2 md:m-0 block text-sm font-bold text-(--primaryColor) uppercase'>
-              Type :
-            </label>
-            <select
-              name='type'
-              value={type}
-              onChange={e => setType(e.target.value)}
-              className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 pl-4 text-base font-medium text-[#6B7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
-            >
-              <option value='debt'>Debt</option>
-              <option value='payment'>Payment</option>
-            </select>
-          </div>
-
-          <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
-            <label className='mb-2 md:m-0 block text-sm font-bold text-(--primaryColor) uppercase'>
-              Amount :
-            </label>
-            <input
-              type='number'
-              name='amount'
-              value={amount}
-              onChange={e => setAmount(e.target.value)}
-              placeholder='Amount'
-              required
-              className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-4 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
-            />
-          </div>
-
-          <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
-            <label className='mb-2 md:m-0 block text-sm font-bold text-(--primaryColor) uppercase'>
-              Date :
-            </label>
-            <input
-              type='date'
-              name='date'
-              value={date}
-              onChange={e => setDate(e.target.value)}
-              placeholder='dd/mm/yyyy'
-              required
-              className='w-full bg-(--background) rounded-sm border border-[#e0e0e0]  py-3 px-4 text-base font-medium text-[#6B7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
-            />
-          </div>
-
-          <button
-            type='submit'
-            className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
-            disabled={loading}
-          >
-            {loading ? "Saving..." : "Add Transaction"}
-          </button>
-
-          {error && (
-              <p className='text-red-500'>⚠️ {error}</p>
-          )}
-
-          {success && (
-            <div className='flex flex-col gap-6'>
-              <p>✅ Transaction added successfully!</p>
-              <Link 
-                href={`/creditorshub/debtors/${debtorId}`} 
-                className='text-(--primaryColor) hover:text-(--secondaryColor) transition'
+            <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+              <label className='mb-2 md:m-0 block text-sm font-bold text-(--primaryColor) uppercase'>
+                Type :
+              </label>
+              <select
+                name='type'
+                value={type}
+                onChange={e => setType(e.target.value)}
+                className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 pl-4 text-base font-medium text-[#6B7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
               >
-                ←  Back to Profile
-              </Link>
+                <option value='debt'>Debt</option>
+                <option value='payment'>Payment</option>
+              </select>
             </div>
-          )}
 
-        </form>
+            <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+              <label className='mb-2 md:m-0 block text-sm font-bold text-(--primaryColor) uppercase'>
+                Amount :
+              </label>
+              <input
+                type='number'
+                name='amount'
+                value={amount}
+                onChange={e => setAmount(e.target.value)}
+                placeholder='Amount'
+                required
+                className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-4 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+              />
+            </div>
+
+            <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+              <label className='mb-2 md:m-0 block text-sm font-bold text-(--primaryColor) uppercase'>
+                Date :
+              </label>
+              <input
+                type='date'
+                name='date'
+                value={date}
+                onChange={e => setDate(e.target.value)}
+                placeholder='dd/mm/yyyy'
+                required
+                className='w-full bg-(--background) rounded-sm border border-[#e0e0e0]  py-3 px-4 text-base font-medium text-[#6B7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+              />
+            </div>
+
+            <button
+              type='submit'
+              className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]'
+              disabled={loading}
+            >
+              {loading ? "Saving..." : "Add Transaction"}
+            </button>
+
+            {error && (
+                <p className='text-red-500'>⚠️ {error}</p>
+            )}
+
+            {success && (
+              <div className='flex flex-col gap-6'>
+                <p>✅ Transaction added successfully!</p>
+                <Link 
+                  href={`/creditorshub/debtors/${debtorId}`} 
+                  className='text-(--primaryColor) hover:text-(--secondaryColor) transition'
+                >
+                  ←  Back to Profile
+                </Link>
+              </div>
+            )}
+
+          </form>
+        </div>       
       </div>
+
     </main>
   );
 }

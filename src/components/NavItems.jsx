@@ -10,7 +10,7 @@ import { navLinks } from '../config/navlinks';
 
 
 
-export function NavItems({ mobile = false }) {
+export function NavItems({ mobile = false, collapsed = false }) {
 
   const pathname = usePathname();
 
@@ -20,7 +20,7 @@ export function NavItems({ mobile = false }) {
       className={
         mobile
           ? 'flex w-full justify-around px-2'
-          : 'flex flex-col gap-5 py-4'
+          : 'flex flex-col gap-5 py-4 px-1'
       }
       >
         {navLinks.map((link) => {
@@ -58,7 +58,9 @@ export function NavItems({ mobile = false }) {
                   width={30}
                   height={30}
                 />
-                {mobile ? isActive ? (<span className='text-xs mt-1'>{link.label}</span>) : ('') : (<span className='text-xs mt-1'>{link.label}</span>)}
+                {(mobile ? isActive : !collapsed) && (
+                  <span className='text-xs mt-1'>{link.label}</span>
+                )}
               </Link>
 
             </li>);

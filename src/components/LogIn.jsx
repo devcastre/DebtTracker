@@ -1,14 +1,11 @@
-'use client'
-
-
+'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient} from '@/src/lib/client';
-
+import Link from 'next/link';
+import { createClient } from '@/src/lib/client';
 
 export default function LogIn() {
-
   const supabase = createClient();
   const router = useRouter();
 
@@ -18,11 +15,6 @@ export default function LogIn() {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [signupComplete, setSignupComplete] = useState(false);
-
-
-  const cleanEmail = email.trim().toLowerCase();
-
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,12 +26,16 @@ export default function LogIn() {
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
-        email: cleanEmail,
+        email: email.trim().toLowerCase(),
         password,
       });
 
       if (error) {
-        setErrorMsg('Invalid email or password.');
+        setErrorMsg(
+          error.code === 'email_not_confirmed'
+            ? 'Please confirm your email first. Check your inbox for the confirmation link.'
+            : 'Invalid email or password.'
+        );
         return;
       }
 
@@ -51,7 +47,6 @@ export default function LogIn() {
     }
   };
 
-
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -59,7 +54,6 @@ export default function LogIn() {
 
     setErrorMsg('');
     setSuccessMsg('');
-    setSignupComplete(false);
 
     if (password.length < 8) {
       setErrorMsg('Password must be at least 8 characters.');
@@ -69,42 +63,40 @@ export default function LogIn() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email: cleanEmail,
+      const { error } = await supabase.auth.signUp({
+        email: email.trim().toLowerCase(),
         password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`,
+        },
       });
 
       if (error) {
-        setErrorMsg(
-          'Unable to create your account. Please check your details and try again.'
-        );
+        setErrorMsg('Unable to create your account. Please check your details and try again.');
         return;
-        }
-
-        if (data.session) {
-          setSuccessMsg('Your account has been created successfully!');
-          setSignupComplete(true);
-          setPassword('');
-        } else if (data.user) {
-          setSuccessMsg(
-            'Account created. Please log in to continue.'
-          );
-          setSignupComplete(false);
-          setPassword('');
-        } else {
-          setErrorMsg('Unable to confirm account creation. Please try again.');
-        }
-      } catch {
-        setErrorMsg('Unable to create your account. Please try again.');
-      } finally {
-        setLoading(false);
       }
+
+      setPassword('');
+      setSuccessMsg(
+        'Account created. Please check your email and click the confirmation link, then log in.'
+      );
+    } catch {
+      setErrorMsg('Unable to create your account. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
+  const closeSuccess = () => {
+    setSuccessMsg('');
+    setIsLogin(true);
+  };
 
   return (
     <div className='p-6 w-full max-w-md mx-auto bg-white shadow-lg rounded-sm mt-20'>
-      <h2 className='text-3xl text-(--primaryColor) font-bold mb-6'>{isLogin ? 'Login' : 'Sign Up'}</h2>
+      <h2 className='text-3xl text-(--primaryColor) font-bold mb-6'>
+        {isLogin ? 'Login' : 'Sign Up'}
+      </h2>
 
       <form className='flex flex-col gap-5' onSubmit={isLogin ? handleLogin : handleSignup}>
         <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
@@ -114,7 +106,7 @@ export default function LogIn() {
           <input
             type='email'
             id='email'
-            autoComplete="email"
+            autoComplete='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder='you@example.com'
@@ -130,7 +122,7 @@ export default function LogIn() {
           <input
             type='password'
             id='password'
-            autoComplete={isLogin ? "current-password" : "new-password"}
+            autoComplete={isLogin ? 'current-password' : 'new-password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder='••••••••'
@@ -138,6 +130,12 @@ export default function LogIn() {
             className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
           />
         </div>
+
+        {isLogin && (
+          <Link href='/forgot-password' className='text-sm text-(--primaryColor) self-end'>
+            Forgot Password?
+          </Link>
+        )}
 
         <button
           type='submit'
@@ -148,89 +146,79 @@ export default function LogIn() {
         </button>
 
         <p className='text-center text-gray-600 mt-2'>
-          {isLogin ? 'Don`t have an account?' : 'Already have an account?'}{' '}
+          {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
           <button
             type='button'
             onClick={() => {
               setIsLogin(!isLogin);
               setErrorMsg('');
               setSuccessMsg('');
-              setSignupComplete(false);
             }}
             className='text-(--primaryColor) hover:underline'
           >
             {isLogin ? 'Sign Up' : 'Login'}
           </button>
         </p>
-
-
-        {successMsg && (
-          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
-            <div className="w-full max-w-sm rounded-md border border-(--secondaryColor) bg-white p-6 text-center shadow-xl">
-              <div className="mb-3 flex justify-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-50">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="h-8 w-8 text-(--primaryColor)"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m4.5 12.75 6 6 9-13.5"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <h3 className="mb-2 text-xl font-bold text-(--primaryColor)">
-                Success!
-              </h3>
-
-              <p role="status" className="mb-6 text-sm text-gray-600">
-                {successMsg}
-              </p>
-
-              {signupComplete && (
-                <button
-                  type="button"
-                  onClick={() => router.replace('/dashboard')}
-                  className="w-full rounded-sm bg-(--primaryColor) px-5 py-3 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-(--secondaryColor)"
-                >
-                  Continue to Dashboard
-                </button>
-              )}
-            </div>
-          </div>
-        )}
-
-
-
-        {errorMsg && (
-          <div
-            onClick={() => setErrorMsg('')}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
-          >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-sm rounded-md border border-red-200 bg-white p-5 text-center shadow-lg"
-            >
-              <p className="mb-2 text-xl font-bold text-red-600">
-                Something went wrong
-              </p>
-
-              <p role="alert" className="text-sm text-gray-600">
-                {errorMsg}
-              </p>
-            </div>
-          </div>
-        )}
-
-
       </form>
+
+      {successMsg && (
+        <div
+          onClick={closeSuccess}
+          className='fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4'
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className='w-full max-w-sm rounded-md border border-(--secondaryColor) bg-white p-6 text-center shadow-xl'
+          >
+            <div className='mb-3 flex justify-center'>
+              <div className='flex h-14 w-14 items-center justify-center rounded-full bg-teal-50'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth={2}
+                  stroke='currentColor'
+                  className='h-8 w-8 text-(--primaryColor)'
+                >
+                  <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 12.75 6 6 9-13.5' />
+                </svg>
+              </div>
+            </div>
+
+            <h3 className='mb-2 text-xl font-bold text-(--primaryColor)'>Check your email</h3>
+
+            <p role='status' className='mb-6 text-sm text-gray-600'>
+              {successMsg}
+            </p>
+
+            <button
+              type='button'
+              onClick={closeSuccess}
+              className='w-full rounded-sm bg-(--primaryColor) px-5 py-3 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-(--secondaryColor)'
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
+
+      {errorMsg && (
+        <div
+          onClick={() => setErrorMsg('')}
+          className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4'
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className='w-full max-w-sm rounded-md border border-red-200 bg-white p-5 text-center shadow-lg'
+          >
+            <p className='mb-2 text-xl font-bold text-red-600'>Something went wrong</p>
+
+            <p role='alert' className='text-sm text-gray-600'>
+              {errorMsg}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

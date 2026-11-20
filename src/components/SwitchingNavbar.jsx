@@ -2,18 +2,40 @@
 
 import { NavItems } from '@/src/components/NavItems';
 import LogoutButton from '@/src/components/LogOut';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export function Sidebar() {
   
+    const [collapsed, setCollapsed] = useState(false)
+
     return (
 
-        <aside className='[background:var(--primary-gradient)] h-screen text-white hidden md:flex md:w-56 xl:w-72 flex-col gap-12 pt-6 pb-4 px-5 md:px-3'>
-            <div className='flex flex-col gap-2'>
-                <h3 className='text-white text-3xl'>Debt Tracker</h3>
-                <hr />
+        <aside className={`[background:var(--primary-gradient)] h-screen text-white hidden md:flex flex-col gap-12 pt-6 pb-4 px-3 transition-all duration-300 ease-in-out ${collapsed ? 'w-20' : 'md:w-56 xl:w-72'}`}>
+            
+            <h3 className={`text-white text-2xl mb-0 ${collapsed? 'self-center': 'self-start'}`}>{collapsed ? 'DB' : 'Debt Tracker'}</h3>
+            
+            <NavItems collapsed={collapsed} />
+
+            <div className={`flex gap-2 items-center ${collapsed? 'flex-col': 'flex-row-reverse'}`}>
+                <button
+                    type='button'
+                    onClick={() => setCollapsed(!collapsed)}
+                    className='flex flex-row text-white hover:bg-white/20 rounded p-1'
+                    aria-label='Toggle sidebar'
+                >
+                    <Image
+                    src={collapsed? '/Icons/sidebarOpen.svg' : '/Icons/sidebarClose.svg'}
+                    alt='sidebarIcon'
+                    width={collapsed? 24 : 50}
+                    height={collapsed? 24 : 50}
+                    />
+                    
+                </button>
+
+                <LogoutButton collapsed={collapsed}/>
             </div>
-            <NavItems />
-            <LogoutButton />
+
         </aside>
     )
 }

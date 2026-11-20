@@ -41,108 +41,111 @@ export default function NewDebtorForm({action}){
         }
     }
     return (
-    <main className='relative px-6 pt-6 pb-32 md:pb-6 flex flex-col w-full h-dvh items-center justify-center'>
-        <button className='absolute left-6 top-5 z-10'>
+    <main className='flex flex-col relative px-6 pt-6 pb-32 md:pb-6 w-full h-dvh items-center justify-center'>
+        <button className='self-start'>
             <Link href={`/creditorshub`} className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-5xl'>
             ←
             </Link>
         </button>
-        <div className='p-6 w-full max-w-md bg-white shadow-lg rounded-sm'>
-            <form action={handleSubmit} className='flex flex-col gap-5'>
+        <div className='w-full h-full flex'>
+            <div className='p-6 w-full max-w-md bg-white shadow-lg rounded-sm m-auto'>
+                <form action={handleSubmit} className='flex flex-col gap-5'>
 
-                <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
-                    <label htmlFor='name' className='mb-3 block text-base font-medium text-(--primaryColor)'>
-                        Name:
-                    </label>                
-                    <input
-                        type='text'
-                        name='name'
-                        id='name'
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                        placeholder='Juan De Luma'
-                        required
-                        className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
-                    />
-                </div>
-                <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
-                    <label htmlFor='contact' className='mb-3 block text-base font-medium text-(--primaryColor)'>
-                        Contact:
-                    </label>                
-                    <PhoneInput
-                        defaultCountry="ph"
-                        value={contact}
-                        onChange={(phone) => setContact(phone)}
-                        forceDialCode={true}
-                        inputProps={{
-                            id: 'contact',  
-                            name: 'contact',
-                            required: true,
-                            placeholder: '9171234567',
-                        }}
-                        className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] p-3 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
-                        inputClassName="!bg-(--background)"
-                        countrySelectorStyleProps={{
-                            buttonClassName: "!bg-(--background)",
-                        }}
-                    />
+                    <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+                        <label htmlFor='name' className='mb-3 block text-base font-medium text-(--primaryColor)'>
+                            Name:
+                        </label>                
+                        <input
+                            type='text'
+                            name='name'
+                            id='name'
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                            placeholder='Juan De Luma'
+                            required
+                            className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+                        />
+                    </div>
+                    <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+                        <label htmlFor='contact' className='mb-3 block text-base font-medium text-(--primaryColor)'>
+                            Contact:
+                        </label>                
+                        <PhoneInput
+                            defaultCountry="ph"
+                            value={contact}
+                            onChange={(phone) => setContact(phone)}
+                            forceDialCode={true}
+                            inputProps={{
+                                id: 'contact',  
+                                name: 'contact',
+                                required: true,
+                                placeholder: '9171234567',
+                            }}
+                            className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] p-3 text-base font-medium text-[#34373e]outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+                            inputClassName="!bg-(--background)"
+                            countrySelectorStyleProps={{
+                                buttonClassName: "!bg-(--background)",
+                            }}
+                        />
 
-                </div>
-                <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
-                    <label htmlFor='amount' className='mb-3 block text-base font-medium text-(--primaryColor)'>
-                        Amount:
-                    </label>                
-                    <input
-                        type='number'
-                        name='amount'
-                        id='amount'
-                        value={amount}
-                        onChange={e => setAmount(e.target.value)}
-                        placeholder='₱ 0000.00'
-                        required
-                        className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
-                    />
+                    </div>
+                    <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+                        <label htmlFor='amount' className='mb-3 block text-base font-medium text-(--primaryColor)'>
+                            Amount:
+                        </label>                
+                        <input
+                            type='number'
+                            name='amount'
+                            id='amount'
+                            value={amount}
+                            onChange={e => setAmount(e.target.value)}
+                            placeholder='₱ 0000.00'
+                            required
+                            className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+                        />
 
-                </div>
-                <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
-                    <label htmlFor='date' className='mb-3 block text-base font-medium text-(--primaryColor)'>
-                        Date:
-                    </label>                
-                    <input
-                        type='date'
-                        name='date'
-                        id='date'
-                        value={date}
-                        onChange={e => setDate(e.target.value)}
-                        placeholder='dd/mm/yyyy'
-                        required
-                        className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6b7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
-                    />
+                    </div>
+                    <div className='grid grid-cols-1 md:grid-cols-[1fr_4fr] items-center gap-2'>
+                        <label htmlFor='date' className='mb-3 block text-base font-medium text-(--primaryColor)'>
+                            Date:
+                        </label>                
+                        <input
+                            type='date'
+                            name='date'
+                            id='date'
+                            value={date}
+                            onChange={e => setDate(e.target.value)}
+                            placeholder='dd/mm/yyyy'
+                            required
+                            className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6b7281] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
+                        />
 
-                </div>                                                
+                    </div>                                                
 
-                <button type='submit' className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]' disabled={loading}>
-                    {loading ? "Saving..." : "Add Debtor"}
-                </button>
+                    <button type='submit' className='w-full p-2 bg-(--primaryColor) hover:bg-(--secondaryColor) text-white rounded-sm shadow-[2px_2px_4px_0px_rgba(0,0,0,0.75)]' disabled={loading}>
+                        {loading ? "Saving..." : "Add Debtor"}
+                    </button>
 
-                {error && (
-                    <p className='text-red-500'>⚠️ {error}</p>
-                )}
+                    {error && (
+                        <p className='text-red-500'>⚠️ {error}</p>
+                    )}
 
-                {success && (
-                    <div className='flex flex-col gap-6'>
-                        <p>✅ Debtors added successfully!</p>
-                        <Link 
-                            href={`/creditorshub`} 
-                            className='text-(--primaryColor) hover:text-(--secondaryColor) transition'
-                        >
-                            ←  Back to Main List
-                        </Link>
-                    </div>                    
-                )}
+                    {success && (
+                        <div className='flex flex-col gap-6'>
+                            <p>✅ Debtors added successfully!</p>
+                            <Link 
+                                href={`/creditorshub`} 
+                                className='text-(--primaryColor) hover:text-(--secondaryColor) transition'
+                            >
+                                ←  Back to Main List
+                            </Link>
+                        </div>                    
+                    )}
 
-            </form>            
+                </form>            
+            </div>            
         </div>
+
     </main>
     )
 }
