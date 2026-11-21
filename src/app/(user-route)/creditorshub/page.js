@@ -1,10 +1,10 @@
 
 
-import ActiveList from '@/src/components/ActiveList'
+import ActiveList from '@/src/components/creditorshubtab/ActiveList'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getActiveDebtors } from '@/src/lib/getActiveDebtors'
-import ExportActiveButton from '@/src/components/ExportActiveButton';
+import ExportActiveButton from '@/src/components/creditorshubtab/ExportActiveButton';
 
 export default async function CreditorsHub() {
 
@@ -13,8 +13,8 @@ export default async function CreditorsHub() {
   
 
   return (
-    <main className='px-6 pt-6 pb-32 md:p-6 w-full flex flex-col'>
-      <div className='flex flex-col gap-12'>
+    <main className='px-6 pt-6 pb-32 md:p-6 w-full flex flex-col items-center'>
+      <div className='flex flex-col gap-12 w-full max-w-360'>
         <div className='flex flex-wrap items-center md:items-start gap-6 justify-center lg:justify-between'>
           <h1 className='text-(--primaryColor) mb-0 text-3xl sm:text-4xl w-100 text-center lg:text-start drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>CreditorsHub</h1>
 

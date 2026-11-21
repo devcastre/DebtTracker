@@ -39,9 +39,9 @@ export default function NewTransactionForm({ action, debtorId }) {
 
 
   return (
-    <main className='flex flex-col px-6 pt-6 pb-32 md:pb-6 w-full h-dvh items-center justify-start'>
+    <main className='flex flex-col px-6 pt-6 pb-32 md:pb-6 w-full lg:h-dvh items-center justify-start'>
       <button className='self-start'>
-          <Link href={`/creditorshub/debtors/${debtorId}`} className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-5xl'>
+          <Link href={`/creditorshub/debtors/${debtorId}`} className='text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-4xl'>
           ←
           </Link>
       </button>

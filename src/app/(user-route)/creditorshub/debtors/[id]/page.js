@@ -1,6 +1,6 @@
 
 
-import ExportDebtorDetailBtn from '@/src/components/ExportDebtorDetailBtn';
+import ExportDebtorDetailBtn from '@/src/components/creditorshubtab/ExportDebtorDetailBtn';
 import { getDebtorById } from '@/src/lib/getDebtorById';
 import { formatDate } from '@/src/utils/dateFunctions';
 import { formatPhoneNumber, toWhatsAppPhone } from '@/src/utils/phoneFunctions';
@@ -15,112 +15,111 @@ export default async function DebtorsProfilePage({params}) {
 
 
   return (
-    <main className='px-6 pt-6 pb-32 md:p-12 w-full flex flex-col gap-5'>       
-      <div className='grid grid-cols-2 lg:grid-cols-3 xs:justify-between xs:gap-0 gap-5'>
-        <button className='col-span-2 lg:col-span-1 justify-self-start flex items-start'>
-          <Link href={`/creditorshub`} className='text-(--primaryColor) drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-4xl'>
-            ←
+    <main className='px-6 pt-6 pb-32 md:p-12 w-full flex flex-col gap-5 items-center'>       
+      <div className='w-full max-w-360'>
+        <div className='grid grid-cols-2 lg:grid-cols-3 xs:justify-between xs:gap-0 gap-5 my-4'>
+          <button className='col-span-2 lg:col-span-1 justify-self-start flex items-start w-9 h-10'>
+            <Link href={`/creditorshub`} className='text-(--primaryColor) drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)] font-bold text-4xl'>
+              ←
+            </Link>
+          </button>
+          <div className='flex flex-col items-start lg:items-center w-full'>
+            <h1 className='text-start lg:text-center text-xl xs:text-4xl text-(--primaryColor) mb-2 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>{debtor.name}</h1>
+            <span className='text-black'>{formatPhoneNumber(debtor.contact)}</span>          
+          </div>
+          <div className='flex flex-col items-end'>
+            <h2 className='text-2xl xs:text-4xl text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{+Number(balance).toFixed(2)}</h2>
+            <span className='text-black'>Balance</span> 
+          </div>  
+        </div>
+
+        <div className='flex flex-col bg-white rounded-sm p-6 gap-12 lg:my-6'>
+          <div className='flex flex-col gap-3 w-full min-h-44'>
+            <h4 className='text-(--primaryColor) text-center border-3 border-(--primaryColor)/50 p-1 rounded-sm'>Recent Debt:</h4>
+            {recentDebt.length === 0 ? (
+                <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
+            ) : (           
+              <ul className='flex flex-col items-center gap-4'>
+                {recentDebt.map(rdebt => (
+                  <li key={rdebt.id} className='grid grid-cols-2 place-items-center w-full'>
+                    <span className='text-black'>₱{rdebt.amount}</span>
+                    <span className='text-black'>{formatDate(rdebt.date)}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div className='flex flex-col gap-3 w-full min-h-44'>
+            <h4 className='text-(--primaryColor) text-center border-3 border-(--primaryColor)/50 p-1 rounded-sm'>Recent Payment:</h4>
+            {recentPayment.length === 0 ? (
+                <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
+            ) : (  
+              <ul className='flex flex-col items-center gap-4'>
+                {recentPayment.map(rpay => (
+                  <li key={rpay.id} className='grid grid-cols-2 place-items-center w-full'>
+                    <span className='text-black'>₱{rpay.amount}</span>
+                    <span className='text-black'>{formatDate(rpay.date)}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>        
+        </div>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-5'>
+
+          {/* Call */}
+          <Link
+            href={`tel:${toWhatsAppPhone(debtor.contact)}`}
+            className='md:hidden bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
+          >
+            <Image
+              src='/Icons/callIconB.svg'
+              alt='Call'
+              width={25}
+              height={25}
+              className='brightness-0 invert'
+            />
+            Call
           </Link>
-        </button>
-        <div className='flex flex-col items-start lg:items-center w-full'>
-          <h1 className='text-center text-xl xs:text-4xl text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>{debtor.name}</h1>
-          <span className='text-black'>{formatPhoneNumber(debtor.contact)}</span>          
+
+          {/* WhatsApp */}
+          <Link
+            href={`https://wa.me/${toWhatsAppPhone(debtor.contact)}`}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
+          >
+            <Image
+              src='/Icons/whatsappIconb.svg'
+              alt='addIcon'
+              width={30}
+              height={30}
+              className='brightness-0 invert'
+            />
+            WhatsApp
+          </Link>
+
+          <ExportDebtorDetailBtn
+            debtor={debtor}
+            balance={balance}
+          />
+
+          <Link
+            href={`/creditorshub/debtors/${debtor.id}/newtransaction`}
+            className='bg-(--primaryColor) text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
+          >
+            <Image
+              src='/Icons/addIconW.svg'
+              alt='addIcon'
+              width={30}
+              height={30}
+            />
+            Add Transaction
+          </Link>
+
         </div>
-        <div className='flex flex-col items-end'>
-          <h2 className='text-2xl xs:text-4xl text-(--primaryColor) mb-0 drop-shadow-[2px_2px_0.5px_rgba(0,0,0,0.75)]'>₱{+Number(balance).toFixed(2)}</h2>
-          <span className='text-black'>Balance</span> 
-        </div>  
       </div>
-
-      <div className='flex flex-col bg-white rounded-sm p-6 gap-12'>
-        <div className='flex flex-col gap-3 w-full min-h-44'>
-          <h4 className='text-(--primaryColor) text-center border-3 border-(--primaryColor)/50 p-1 rounded-sm'>Recent Debt:</h4>
-          {recentDebt.length === 0 ? (
-              <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
-          ) : (           
-            <ul className='flex flex-col items-center gap-4'>
-              {recentDebt.map(rdebt => (
-                <li key={rdebt.id} className='grid grid-cols-2 place-items-center w-full'>
-                  <span className='text-black'>₱{rdebt.amount}</span>
-                  <span className='text-black'>{formatDate(rdebt.date)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <div className='flex flex-col gap-3 w-full min-h-44'>
-          <h4 className='text-(--primaryColor) text-center border-3 border-(--primaryColor)/50 p-1 rounded-sm'>Recent Payment:</h4>
-          {recentPayment.length === 0 ? (
-              <div className='py-10 mb-2 flex flex-col items-center justify-center'>No Records Found</div>
-          ) : (  
-            <ul className='flex flex-col items-center gap-4'>
-              {recentPayment.map(rpay => (
-                <li key={rpay.id} className='grid grid-cols-2 place-items-center w-full'>
-                  <span className='text-black'>₱{rpay.amount}</span>
-                  <span className='text-black'>{formatDate(rpay.date)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>        
-      </div>
-      <div className='grid grid-cols-2 md:grid-cols-3 gap-5'>
-
-        {/* Call */}
-        <Link
-          href={`tel:${toWhatsAppPhone(debtor.contact)}`}
-          className='md:hidden bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
-        >
-          <Image
-            src='/Icons/callIconB.svg'
-            alt='Call'
-            width={25}
-            height={25}
-            className='brightness-0 invert'
-          />
-          Call
-        </Link>
-
-        {/* WhatsApp */}
-        <Link
-          href={`https://wa.me/${toWhatsAppPhone(debtor.contact)}`}
-          target='_blank'
-          rel='noopener noreferrer'
-          className='bg-green-700 text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
-        >
-          <Image
-            src='/Icons/whatsappIconb.svg'
-            alt='addIcon'
-            width={30}
-            height={30}
-            className='brightness-0 invert'
-          />
-          WhatsApp
-        </Link>
-
-        <ExportDebtorDetailBtn
-          debtor={debtor}
-          balance={balance}
-        />
-
-        <Link
-          href={`/creditorshub/debtors/${debtor.id}/newtransaction`}
-          className='bg-(--primaryColor) text-base md:text-lg py-3 w-full rounded text-white flex flex-col 2xs:flex-row md:flex-wrap gap-2 items-center justify-center shadow-[4px_4px_4px_0px_rgba(0,0,0,0.75)]'
-        >
-          <Image
-            src='/Icons/addIconW.svg'
-            alt='addIcon'
-            width={30}
-            height={30}
-          />
-          Add Transaction
-        </Link>
-
-      </div>
-
-
-
     </main>
   )
 }

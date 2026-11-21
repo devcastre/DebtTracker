@@ -1,5 +1,5 @@
 
-import NewTransactionForm from '@/src/components/NewTransactionForm';
+import NewTransactionForm from '@/src/components/creditorshubtab/NewTransactionForm';
 import { addNewTransaction } from '@/src/utils/addNewTransaction';
 
 

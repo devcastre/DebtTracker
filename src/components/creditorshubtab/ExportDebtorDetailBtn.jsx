@@ -3,7 +3,7 @@
 
 
 import Image from 'next/image'
-import { exportDebtorDetails } from '../services/excelExport'
+import { exportDebtorDetails } from '../../services/excelExport'
 
 export default function ExportDebtorDetailBtn({ debtor, balance }) {
   return (

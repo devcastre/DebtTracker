@@ -4,10 +4,10 @@ import ListControls from '@/src/components/ListControls';
 import Link from 'next/link';
 import Image from 'next/image';
 import useTrashDebtor from '@/src/hooks/trashDebtor';
-import Modal from '@/src/components/Modal';
+import Modal from '@/src/components/creditorshubtab/Modal';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
-import { getGroupHeading, getMonthKey } from '../utils/dateFunctions';
+import { getGroupHeading, getMonthKey } from '../../utils/dateFunctions';
 
 export default function ActiveList({debtors}) {
 

@@ -109,7 +109,7 @@ export default function LogIn() {
             autoComplete='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder='you@example.com'
+            placeholder='you123@gmail.com'
             required
             className='w-full bg-(--background) rounded-sm border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#34373e] outline-none shadow-[inset_3px_3px_2px_0_rgba(0,0,0,0.25)]'
           />
